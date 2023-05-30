@@ -1,0 +1,61 @@
+package cg.br.meucalzone.models;
+
+import jakarta.persistence.*;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "batatas")
+public class Batata {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Size(max = 1)
+    private String tamanho;
+
+    @NotEmpty
+    private Double preco;
+
+    public Batata(String tamanho, Double preco) {
+        this.tamanho = tamanho;
+        this.preco = preco;
+    }
+
+    public Batata() {}
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTamanho() {
+        return tamanho;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTamanho(String tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    @Override
+    public String toString() {
+        return "Batata{" +
+                "id=" + id +
+                ", tamanho='" + tamanho + '\'' +
+                ", preco=" + preco +
+                '}';
+    }
+}
