@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pessoas")
@@ -12,7 +14,7 @@ public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int idPessoa;
     @NotEmpty
     private String nome;
 
@@ -26,9 +28,17 @@ public class Pessoa {
     @NotEmpty
     private String endereco;
 
+    @OneToMany(mappedBy = "pessoa")
+    private List<Pedido> pedidos;
+
+    public void addPedido(Pedido pedido) {
+        this.pedidos.add(pedido);
+    }
+
     public Pessoa() {}
 
     public Pessoa(String nome, String cpf, String email, String endereco) {
+        this.pedidos = new ArrayList<>();
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
@@ -36,7 +46,7 @@ public class Pessoa {
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idPessoa = id;
     }
 
     public void setNome(String nome) {
@@ -56,7 +66,7 @@ public class Pessoa {
     }
 
     public int getId() {
-        return id;
+        return idPessoa;
     }
 
     public String getNome() {
@@ -78,7 +88,7 @@ public class Pessoa {
     @Override
     public String toString() {
         return "Pessoa{" +
-                "id=" + id +
+                "id=" + idPessoa +
                 ", nome='" + nome + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", email='" + email + '\'' +
