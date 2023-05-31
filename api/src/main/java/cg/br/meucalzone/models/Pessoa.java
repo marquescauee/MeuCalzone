@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
 public class Pessoa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPessoa;
     @NotEmpty
     private String nome;
@@ -24,6 +26,10 @@ public class Pessoa {
 
     @NotEmpty
     private String email;
+
+    @NotEmpty
+    @Size(max = 1)
+    private String tipo;
 
     @NotEmpty
     private String endereco;
@@ -43,6 +49,14 @@ public class Pessoa {
         this.cpf = cpf;
         this.email = email;
         this.endereco = endereco;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
     }
 
     public void setId(int id) {

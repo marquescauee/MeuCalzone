@@ -9,32 +9,21 @@ import javax.validation.constraints.NotEmpty;
 public class ItemPedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idItemPedido;
-
     @ManyToOne
     @JoinColumn(name = "idPedido", nullable = false)
     private Pedido pedido;
-
+    @Id
     @ManyToOne
     @JoinColumn(name = "idProduto", nullable = false)
     private Produto produto;
 
     @NotEmpty
-    private int qtdProduto;
+    private int qtdItensPedido;
 
     public ItemPedido() {}
 
     public ItemPedido(int qtdProduto) {
-        this.qtdProduto = qtdProduto;
-    }
-
-    public int getIdItemPedido() {
-        return idItemPedido;
-    }
-
-    public void setIdItemPedido(int idItemPedido) {
-        this.idItemPedido = idItemPedido;
+        this.qtdItensPedido = qtdProduto;
     }
 
     public Pedido getPedido() {
@@ -54,10 +43,10 @@ public class ItemPedido {
     }
 
     public int getQtdProduto() {
-        return qtdProduto;
+        return qtdItensPedido;
     }
 
     public void setQtdProduto(int qtdProduto) {
-        this.qtdProduto = qtdProduto;
+        this.qtdItensPedido = qtdProduto;
     }
 }

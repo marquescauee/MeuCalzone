@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 public class TipoProduto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idTipoProduto;
 
     @Size(max = 1)
