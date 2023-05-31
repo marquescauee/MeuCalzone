@@ -3,6 +3,7 @@ package cg.br.meucalzone.models;
 import jakarta.persistence.*;
 
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "tipo_produto")
@@ -14,6 +15,9 @@ public class TipoProduto {
 
     @Size(max = 1)
     private String tipo;
+
+    @OneToMany(mappedBy = "idTipo")
+    private List<Produto> produtos;
 
     public TipoProduto() {}
 
