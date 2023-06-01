@@ -6,13 +6,13 @@ import Slider from '../components/slider/Slider';
 
 const Home = () => {
     return (
-        <div>
+        <>
             <Header />
             <Slider />
             <BotaoPedido />
             <Card />
             <Footer />
-        </div>
+        </>
     )
 }
 
