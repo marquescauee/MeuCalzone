@@ -16,43 +16,43 @@ const ExibirPedidos = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row">Tesoura + Máquina</th>
+                            <th scope="row">Trazer do Banco</th>
                             <td>R$35,00</td>
                         </tr>
                         <tr>
-                            <th scope="row">Degradê navalhado</th>
+                            <th scope="row">Trazer do Banco</th>
                             <td>R$35,00</td>
                         </tr>
                         <tr>
-                            <th scope="row">Luzes</th>
+                            <th scope="row">Trazer do Banco</th>
                             <td>R$40,00</td>
                         </tr>
                         <tr>
-                            <th scope="row">Progressiva</th>
+                            <th scope="row">Trazer do Banco</th>
                             <td>R$60,00</td>
                         </tr>
                         <tr>
-                            <th scope="row">Barba</th>
+                            <th scope="row">Trazer do Banco</th>
                             <td>R$25,00</td>
                         </tr>
                         <tr>
-                            <th scope="row">Cabelo + Barba</th>
+                            <th scope="row">Trazer do Banco</th>
                             <td>R$50,00</td>
                         </tr>
                         <tr>
-                            <th scope="row">Sobrancelha</th>
+                            <th scope="row">Trazer do Banco</th>
                             <td>R$15,00</td>
                         </tr>
                         <tr>
-                            <th scope="row">Limpeza de pele (Máscara)</th>
+                            <th scope="row">Trazer do Banco</th>
                             <td>R$25,00</td>
                         </tr>
                         <tr>
-                            <th scope="row">Hidratação</th>
+                            <th scope="row">Trazer do Banco</th>
                             <td>R$20,00</td>
                         </tr>
                         <tr>
-                            <th scope="row">Coloração</th>
+                            <th scope="row">Trazer do Banco</th>
                             <td>R$25,00</td>
                         </tr>
                     </tbody>
