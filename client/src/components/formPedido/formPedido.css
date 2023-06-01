@@ -1,0 +1,13 @@
+.balcao {
+    margin-left: 4rem;
+}
+
+.endereco {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+}
+
+.botaoEntrar {
+    text-decoration: none;
+}

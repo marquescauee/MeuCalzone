@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom'
 import './botaoPedido.css'
 
 const BotaoPedido = () => {
     return (
         <div className='divBotao'>
-            <button className="botao">Faça seu Pedido!</button>
+            <Link to={"/pedido"} className="botao">Faça seu Pedido!</Link>
         </div>
     )
 }

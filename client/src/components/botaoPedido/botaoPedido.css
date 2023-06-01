@@ -9,6 +9,11 @@
     background-color: #eeb60f;
     opacity: 0.8;
     transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
 }
 
 .botao:hover {
@@ -18,4 +23,6 @@
 
 .divBotao {
     margin-top: 30px;
+    display: flex;
+    justify-content: center;
 }
