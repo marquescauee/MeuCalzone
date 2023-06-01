@@ -1,7 +1,16 @@
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './formPedido.css'
 
 const FormPedido = () => {
+
+    const navigate = useNavigate()
+
+    const handleSubmit = () => {
+        //TODO
+        navigate("/meusPedidos")
+    }
+
+
     return (
         <div className='mb-5'>
             <div className="row justify-content-center d-flex">
@@ -65,9 +74,9 @@ const FormPedido = () => {
                                 </div>
 
                                 <div className="row mb-5">
-                                    <Link type="submit" className="m-auto w-50 my-4 d-block p-2 botaoEntrar">
+                                    <button onClick={handleSubmit} type="submit" className="m-auto w-50 my-4 d-block p-2 botaoEntrar">
                                         Fazer Pedido
-                                    </Link>
+                                    </button>
                                 </div>
                             </form>
                         </div>
