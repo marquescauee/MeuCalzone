@@ -23,7 +23,7 @@ const Header = () => {
                             <Link className="nav-link text-light" to={"/localizacao"}>Localização</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link text-light bg-warning text-dark noHover" to={"/localizacao"}>Login/Cadastro</Link>
+                            <Link className="nav-link text-light bg-warning text-dark noHover" to={"/loginCadastro"}>Login/Cadastro</Link>
                         </li>
                     </ul>
                 </nav>

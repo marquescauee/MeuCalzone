@@ -3,7 +3,6 @@
 }
 
 body {
-  background: #141E30;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #243B55, #141E30); 
+  background: #141E30;
   background: linear-gradient(to right, #243B55, #141E30);
 }
