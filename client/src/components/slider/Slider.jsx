@@ -44,7 +44,7 @@ const Slider = () => {
                         <img src="assets/calzone_2.jpg" className="d-block w-100" alt="calzone 2" />
                         <div className="carousel-caption">
                             <h2>Massa caseira</h2>
-                            <p>Nós mesmos fabricamos nossos produtos, nada artificial!</p>
+                            <p>Nós mesmos fabricamos nossos produtos. Nada aqui é artificial!</p>
                             <a href="contato.html" className="btn btn-dark">Entre em contato</a>
                         </div>
                     </div>

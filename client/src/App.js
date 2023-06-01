@@ -1,4 +1,5 @@
 import './App.css';
+import BotaoPedido from './components/botaoPedido/BotaoPedido';
 import Card from './components/card/Card';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
@@ -9,6 +10,7 @@ function App() {
     <div className="App">
       <Header />
       <Slider />
+      <BotaoPedido />
       <Card />
       <Footer />
     </div>

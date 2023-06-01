@@ -1,0 +1,21 @@
+.botao {
+    font-family: 'Cookie', cursive;
+    height: 80px;
+    width: 400px;
+    font-size: 25px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    background-color: #eeb60f;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.botao:hover {
+    background-color: #FFC107;
+    opacity: 1;
+}
+
+.divBotao {
+    margin-top: 30px;
+}

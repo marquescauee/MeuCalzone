@@ -4,11 +4,11 @@ import './header.css'
 const Header = () => {
     return (
         <div>
-            <header className="d-flex flex-wrap justify-content-center align-items-center py-3 mb-4 line-header">
-                <nav className="w-75 d-flex align-items-center">
+            <header className="d-flex flex-wrap align-items-center py-2 mb-3 line-header">
+                <nav className="w-75 m-auto d-flex align-items-center">
                     <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-light text-decoration-none navTitle">
                         <span className="fs-4 text-light">
-                            <img src="assets/calzone_logo.png" width="80" alt=""/>
+                            <img src="assets/calzone_logo2.png" width="80" alt=""/>
                         </span>
                         <span className="navMeuCalzone">Meu Calzone</span>
                     </a>
