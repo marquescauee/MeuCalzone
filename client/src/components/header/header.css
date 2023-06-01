@@ -1,0 +1,25 @@
+ul li a {
+    font-size: 20px;
+}
+
+.nav-link:hover {
+    color: #7a7a7a !important;
+}
+
+.navTitle {
+    gap: 20px;
+}
+
+.navMeuCalzone {
+    font-family: 'Cookie', cursive;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.nav-link {
+    font-size: 20px !important;
+}
+
+.line-header {
+    border-bottom: 1px solid #c0bfbf;
+}
