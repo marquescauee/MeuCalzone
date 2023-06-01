@@ -2,7 +2,7 @@ import './card.css'
 
 const Card = () => {
     return (
-        <div className="d-flex justify-content-evenly align-items-center container-card ">
+        <div className="d-flex justify-content-evenly container-card ">
             <div className="card">
                 <img src="assets/garcom.jpg" className="card-img-top" alt="..."/>
                     <div className="card-body">
