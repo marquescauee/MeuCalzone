@@ -16,11 +16,11 @@ const Header = () => {
                     </Link>
                     <ul className="nav nav-pills">
                         <li className="nav-item">
-                            <Link className="nav-link text-light" to={"/clientes"}>Clientes</Link>
+                            <Link className="nav-link text-light" to={"/admin/clientes"}>Clientes</Link>
                         </li>
 
                         <li className="nav-item">
-                            <Link className="nav-link text-light" to={"/produtos"}>Produtos</Link>
+                            <Link className="nav-link text-light" to={"/admin/produtos"}>Produtos</Link>
                         </li>
                     </ul>
 
