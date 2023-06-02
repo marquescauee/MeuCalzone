@@ -1,0 +1,66 @@
+.table {
+    position: relative;
+    justify-content: left;
+    flex-direction: column;
+    padding: 10px;
+    overflow-x:auto;
+  }
+  
+  .textArea {
+    display: flex;
+    width: 55%;
+    height: 500px;
+    background-color: black;
+    margin: 2% auto;
+    overflow-y: scroll;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color:#fff;
+    -webkit-box-shadow: inset 0 0 6px rgba(90,90,90,0.7);
+  }
+  
+  .box {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: -30px;
+  }
+  
+  .tabela {
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .link-tabela {
+    text-decoration: none;
+  }
+  
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  
+  .opcaoSol {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 600px;
+    height: 600px;
+    margin: 0 0 0 2%;
+  }
+  
+  .b1 {
+    text-decoration: none; 
+    border:none;
+    background-color: #aa770a;
+    height: 100px;
+    width: 300px;
+    margin: 0 auto;
+    border-radius: 10px;
+  }
