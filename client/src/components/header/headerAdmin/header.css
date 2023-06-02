@@ -1,0 +1,8 @@
+.tituloAdmin {
+    color: white;
+    font-size: 40px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+}

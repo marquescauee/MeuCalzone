@@ -5,6 +5,7 @@ import Localizacao from "./pages/Localizacao";
 import LoginCadastro from "./pages/LoginCadastro";
 import Pedido from "./pages/Pedido";
 import MeusPedidos from "./pages/MeusPedidos";
+import Admin from "./pages/Admin";
 
 const MyRoutes = () => {
     return (
@@ -16,6 +17,7 @@ const MyRoutes = () => {
                 <Route element={<LoginCadastro />} path="/loginCadastro"></Route>
                 <Route element={<Pedido />} path="/pedido"></Route>
                 <Route element={<MeusPedidos />} path="/meusPedidos"></Route>
+                <Route element={<Admin />} path="/admin"></Route>
             </Routes>
         </BrowserRouter>
     )
