@@ -1,15 +1,13 @@
 import React from "react";
 import { Route, BrowserRouter, Routes } from "react-router-dom"
-import Home from './pages/Home';
-import Localizacao from "./pages/Localizacao";
-import LoginCadastro from "./pages/LoginCadastro";
-import Pedido from "./pages/Pedido";
-import MeusPedidos from "./pages/MeusPedidos";
-import Admin from "./pages/Admin";
-import AdminClientes from "./pages/AdminClientes";
-import AdminProduto from "./pages/AdminProdutos";
-import AdminEditCliente from "./pages/AdminEditCliente";
-import AdminEditProduto from "./pages/AdminEditProduto";
+import Home from './pages/site/Home';
+import Localizacao from "./pages/site/Localizacao";
+import LoginCadastro from "./pages/site/LoginCadastro";
+import Pedido from "./pages/site/Pedido";
+import MeusPedidos from "./pages/site/MeusPedidos";
+import Admin from "./pages/admin/Admin";
+import AdminClientes from "./pages/admin/AdminClientes";
+import AdminProduto from "./pages/admin/AdminProdutos";
 
 const MyRoutes = () => {
     return (
@@ -27,9 +25,6 @@ const MyRoutes = () => {
                 <Route element={<Admin />} path="/admin"></Route>
                 <Route element={<AdminClientes />} path="/admin/clientes"></Route>
                 <Route element={<AdminProduto />} path="/admin/produtos"></Route>
-
-                <Route element={<AdminEditCliente />} path="/admin/clientes/{id}"></Route>
-                <Route element={<AdminEditProduto />} path="/admin/produtos/{id}"></Route>
             </Routes>
         </BrowserRouter>
     )

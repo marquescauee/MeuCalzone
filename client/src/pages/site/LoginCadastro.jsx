@@ -1,7 +1,7 @@
-import Footer from "../components/footer/Footer"
-import Header from "../components/header/headerCliente/Header"
-import Login from "../components/login/Login"
-import Register from "../components/register/Register"
+import Footer from "../../components/footer/Footer"
+import Header from "../../components/header/headerCliente/Header"
+import Login from "../../components/login/Login"
+import Register from "../../components/register/Register"
 
 const LoginCadastro = () => {
     return (

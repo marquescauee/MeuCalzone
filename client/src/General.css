@@ -42,6 +42,26 @@
     text-decoration: none;
   }
   
+  .botaoEditar {
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 20px;
+    color: #ffc107 ;
+  }
+
+  .botaoRemover {
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 20px;
+    color: #dc3545
+  }
+
+  .modalEdit {
+    font-size: 16px;
+  }
+
   .cursor-pointer {
     cursor: pointer;
   }
