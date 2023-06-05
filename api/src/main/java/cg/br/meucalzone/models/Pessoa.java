@@ -3,7 +3,6 @@ package cg.br.meucalzone.models;
 import jakarta.persistence.*;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -33,6 +32,9 @@ public class Pessoa {
 
     @NotEmpty
     private String endereco;
+
+    @NotEmpty
+    private String senha;
 
     @OneToMany(mappedBy = "pessoa")
     private List<Pedido> pedidos;
@@ -77,6 +79,14 @@ public class Pessoa {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getSenha() {
+        return senha;
     }
 
     public int getId() {
