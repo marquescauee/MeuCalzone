@@ -11,3 +11,11 @@
 .botaoEntrar {
     text-decoration: none;
 }
+
+.margemEsquerda {
+    margin-left: 2.5rem;
+}
+
+.w-20 {
+    width: 20% !important;
+}

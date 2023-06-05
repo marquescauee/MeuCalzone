@@ -3,8 +3,30 @@ import Header from "../../components/header/headerAdmin/Header"
 import CreateModal from "../../components/modalTipos/CreateModal"
 import EditModal from "../../components/modalTipos/EditModal"
 import DeleteModal from "../../components/modalTipos/DeleteModal"
+import { useState } from "react"
 
 const AdminTipos = () => {
+
+    const [tipo, setTipo] = useState('')
+    const [descricao, setDescricao] = useState('')
+
+    const cadastrarTipo = () => {
+        console.log('cadastrou')
+    }
+
+    const editarTipo = () => {
+        console.log('editou')
+    }
+
+    const deletarTipo = () => {
+        console.log('deletou')
+    }
+
+    const resetEstado = () => {
+        setTipo('')
+        setDescricao('')
+    }
+
     return (
         <div>
             <Header />
@@ -14,7 +36,7 @@ const AdminTipos = () => {
             </div>
             <div className="box">
                 <div className="opcaoSol">
-                    <CreateModal />
+                    <CreateModal tipo={tipo} setTipo={setTipo} descricao={descricao} setDescricao={setDescricao} cadastrarTipo={cadastrarTipo} resetEstado={resetEstado}/>
                 </div>
                 <div className="textArea">
                     <div className="table">
@@ -36,11 +58,11 @@ const AdminTipos = () => {
                                     </td>
 
                                     <td>
-                                        <EditModal />
+                                        <EditModal  tipo={tipo} setTipo={setTipo} descricao={descricao} setDescricao={setDescricao} editarTipo={editarTipo} resetEstado={resetEstado}/>
                                     </td>
 
                                     <td>
-                                        <DeleteModal />
+                                        <DeleteModal deletarTipo={deletarTipo} resetEstado={resetEstado} descricao={descricao}/>
                                     </td>
                                 </tr>
                             </tbody>

@@ -2,6 +2,7 @@ package cg.br.meucalzone.models;
 
 import jakarta.persistence.*;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -16,13 +17,17 @@ public class TipoProduto {
     @Size(max = 1)
     private String tipo;
 
+    @NotEmpty
+    private String descricao;
+
     @OneToMany(mappedBy = "idTipo")
     private List<Produto> produtos;
 
     public TipoProduto() {}
 
-    public TipoProduto(String tipo) {
+    public TipoProduto(String tipo, String descricao) {
         this.tipo = tipo;
+        this.descricao = descricao;
     }
 
     public int getIdTipoProduto() {
@@ -39,6 +44,23 @@ public class TipoProduto {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+
+    public String getDescricao() {
+        return this.descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public List<Produto> getProdutos() {
+        return this.produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     @Override

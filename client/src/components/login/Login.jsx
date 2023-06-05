@@ -1,6 +1,15 @@
+import { useState } from 'react'
 import './login.css'
 
 const Login = () => {
+
+    const [emailLogin, setEmailLogin] = useState('')
+    const [senhaLogin, setSenhaLogin] = useState('')
+
+   const handleLogin = () => {
+    //TODO
+   }
+
     return (
         <div className='divLogin d-flex'>
             <div className="row justify-content-center d-flex align-self-center ">
@@ -17,7 +26,7 @@ const Login = () => {
                                     <div className="col-md-10 d-block m-auto">
                                         <input id="email" type="email"
                                             className="form-control" name="email"
-                                            required autocomplete="email" autofocus />
+                                            required autocomplete="email" autofocus value={emailLogin} onChange={e => setEmailLogin(e.target.value)}/>
                                     </div>
                                 </div>
 
@@ -28,18 +37,12 @@ const Login = () => {
                                     <div className="col-md-10 d-block m-auto">
                                         <input id="password" type="password"
                                             className="form-control" name="password"
-                                            required autocomplete="current-password" />                              
+                                            required autocomplete="current-password" value={senhaLogin} onChange={e => setSenhaLogin(e.target.value)}/>                              
                                     </div>
                                 </div>
 
                                 <div className="row mb-5">
-                                    {/* <div className="col-md-8 offset-md-4 m-auto div-rec">
-                                        <a className="rec-senha" href="">
-                                            Esqueceu a senha? Recupere aqui
-                                        </a>
-                                    </div> */}
-
-                                    <button type="submit" className="m-auto w-50 my-4 d-block p-2 botaoEntrar">
+                                    <button onClick={handleLogin} type="submit" className="m-auto w-50 my-4 d-block p-2 botaoEntrar">
                                         Entrar
                                     </button>
                                 </div>

@@ -1,6 +1,21 @@
+import { useState } from 'react'
 import './register.css'
 
 const Register = () => {
+
+    const [nomeCadastro, setNomeCadastro] = useState('')
+    const [emailCadastro, setEmailCadastro] = useState('')
+    const [cpfCadastro, setCpfCadastro] = useState('')
+    const [ruaCadastro, setRuaCadastro] = useState('')
+    const [numero, setNumeroCadastro] = useState('')
+    const [bairroCadastro, setBairroCadastro] = useState('')
+    const [cidadeCadastro, setCidadeCadastro] = useState('')
+    const [senhaCadastro, setSenhaCadastro] = useState('')
+
+    const handleRegister = () => {
+        //TODO
+    }
+
     return (
         <div>
             <div className="row justify-content-center">
@@ -17,7 +32,7 @@ const Register = () => {
                                     <div className="col-md-10 d-block m-auto">
                                         <input id="nome" type="text"
                                             className="form-control" name="nome"
-                                            required />
+                                            required value={nomeCadastro} onChange={e => setNomeCadastro(e.target.value)}/>
                                     </div>
                                 </div>
                                 <div className="row mb-2 d-block">
@@ -27,7 +42,7 @@ const Register = () => {
                                     <div className="col-md-10 d-block m-auto">
                                         <input id="email" type="email"
                                             className="form-control" name="email"
-                                            required autocomplete="email" autofocus />
+                                            required autocomplete="email" autofocus value={emailCadastro} onChange={e => setEmailCadastro(e.target.value)}/>
                                     </div>
                                 </div>
                                 <div className="row mb-2 d-block">
@@ -37,7 +52,7 @@ const Register = () => {
                                     <div className="col-md-10 d-block m-auto">
                                         <input id="cpf" type="text"
                                             className="form-control" name="cpf"
-                                            required />
+                                            required value={cpfCadastro} onChange={e => setCpfCadastro(e.target.value)}/>
                                     </div>
                                 </div>
 
@@ -48,7 +63,7 @@ const Register = () => {
                                     <div className="col-md-10 d-block m-auto">
                                         <input id="rua" type="text"
                                             className="form-control" name="rua"
-                                            required />
+                                            required value={ruaCadastro} onChange={e => setRuaCadastro(e.target.value)}/>
                                     </div>
                                 </div>
 
@@ -60,7 +75,7 @@ const Register = () => {
                                         <div className="col-md-3 d-flex margemEsquerda w-50">
                                             <input id="numero" type="number" min="0"
                                                 className="form-control" name="numero"
-                                                required />
+                                                required value={numero} onChange={e => setNumeroCadastro(e.target.value)}/>
                                         </div>
                                     </div>
 
@@ -71,7 +86,7 @@ const Register = () => {
                                         <div className="col-md-4 d-flex w-80">
                                             <input id="bairro" type="text"
                                                 className="form-control" name="bairro"
-                                                required />
+                                                required value={bairroCadastro} onChange={e => setBairroCadastro(e.target.value)}/>
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +100,7 @@ const Register = () => {
                                     <div className="col-md-10 d-block m-auto">
                                         <input id="cidade" type="text"
                                             className="form-control" name="cidade"
-                                            required />
+                                            required value={cidadeCadastro} onChange={e => setCidadeCadastro(e.target.value)}/>
                                     </div>
                                 </div>
                                 <div className="row mb-4 d-block">
@@ -95,12 +110,12 @@ const Register = () => {
                                     <div className="col-md-10 d-block m-auto">
                                         <input id="password" type="password"
                                             className="form-control" name="password"
-                                            required autocomplete="current-password" />
+                                            required autocomplete="current-password" value={senhaCadastro} onChange={e => setSenhaCadastro(e.target.value)}/>
                                     </div>
                                 </div>
 
                                 <div className="row ">
-                                    <button type="submit" className="m-auto w-50 d-block btn-login p-2 botaoEntrar">
+                                    <button onClick={handleRegister} type="submit" className="m-auto w-50 d-block btn-login p-2 botaoEntrar">
                                         Cadastrar
                                     </button>
                                 </div>

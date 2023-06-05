@@ -1,4 +1,4 @@
-const EditModal = () => {
+const EditModal = ({descricao, setDescricao, quantidade, setQuantidade, tipo, setTipo, editarProduto, resetEstado}) => {
     return (
         <>
             <button type="button" className="link-tabela botaoEditar" data-bs-toggle="modal" data-bs-target="#ModalEditProduto"
@@ -17,31 +17,26 @@ const EditModal = () => {
                         </div>
                         <div className="modal-body">
                             <form action="#" method="PUT">
-                                <div className="mb-3">
-                                    <label htmlFor="nome" className="form-label w-100">Nome</label>
-                                    <input type="text" className="form-control" id="nomeEditProduct" aria-describedby="nome"/>
+                            <div className="mb-3">
+                                    <label htmlFor="desc" className="form-label w-100">Descrição</label>
+                                    <input type="text" className="form-control" id="descCreateProduct" aria-describedby="desc" value={descricao} onChange={e => setDescricao(e.target.value)}/>
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="email" className="form-label w-100">Email</label>
-                                    <input type="email" className="form-control" id="emailEditProduct" aria-describedby="emailHelp" />
+                                    <label htmlFor="quantidade" className="form-label w-100">Quantidade</label>
+                                    <input type="text" className="form-control" id="qtdCreateProduct" aria-describedby="qtdHelp"   value={quantidade} onChange={e => setQuantidade(e.target.value)} />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="cpf" className="form-label w-100">CPF</label>
-                                    <input type="text" className="form-control" id="cpfEditProduct" />
+                                    <label htmlFor="tipo" className="form-label w-100">Tipo</label>
+                                    <select className="form-select" name="calzone" id="calzone" onChange={e => setTipo(e.target.value)}>
+                                            <option value="1">Calzone</option>
+                                            <option value="2">Batata</option>
+                                            <option value="3">Bebida</option>
+                                        </select>
                                 </div>
-
-                                <div className="mb-3">
-                                    <label htmlFor="endereco" className="form-label w-100">Endereço</label>
-                                    <input type="text" className="form-control" id="enderecoEditProduct" />
-                                </div>
-
-                                <div className="mb-3">
-                                    <label htmlFor="password" className="form-label w-100">Senha</label>
-                                    <input type="password" className="form-control" id="passwordEditProduct" />
-                                </div>
+                     
                                 <div className="modal-footer border-0">
-                                    <button type="button" className="btn btn-outline-light" data-bs-dismiss="modal">Voltar</button>
-                                    <button type="submit" className="btn btn-warning">Salvar</button>
+                                    <button onClick={resetEstado} type="button" className="btn btn-outline-light" data-bs-dismiss="modal">Voltar</button>
+                                    <button onClick={editarProduto} type="submit" className="btn btn-warning">Salvar</button>
                                 </div>
                             </form>
                         </div>

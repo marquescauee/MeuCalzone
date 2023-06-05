@@ -79,7 +79,7 @@ public class Pessoa {
         this.email = email;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
@@ -107,7 +107,7 @@ public class Pessoa {
         return email;
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
