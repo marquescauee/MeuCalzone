@@ -16,6 +16,7 @@ public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPessoa;
+
     @NotEmpty
     private String nome;
 
@@ -31,10 +32,12 @@ public class Pessoa {
     private String tipo;
 
     @NotEmpty
-    private String endereco;
+    private String senha;
 
     @NotEmpty
-    private String senha;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idEndereco", nullable = false)
+    private Endereco endereco;
 
     @OneToMany(mappedBy = "pessoa")
     private List<Pedido> pedidos;
@@ -45,12 +48,11 @@ public class Pessoa {
 
     public Pessoa() {}
 
-    public Pessoa(String nome, String cpf, String email, String endereco) {
+    public Pessoa(String nome, String cpf, String email) {
         this.pedidos = new ArrayList<>();
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
-        this.endereco = endereco;
     }
 
     public void setTipo(String tipo) {

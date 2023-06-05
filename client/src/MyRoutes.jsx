@@ -8,6 +8,7 @@ import MeusPedidos from "./pages/site/MeusPedidos";
 import Admin from "./pages/admin/Admin";
 import AdminClientes from "./pages/admin/AdminClientes";
 import AdminProduto from "./pages/admin/AdminProdutos";
+import AdminTipos from "./pages/admin/AdminTipos";
 
 const MyRoutes = () => {
     return (
@@ -25,6 +26,7 @@ const MyRoutes = () => {
                 <Route element={<Admin />} path="/admin"></Route>
                 <Route element={<AdminClientes />} path="/admin/clientes"></Route>
                 <Route element={<AdminProduto />} path="/admin/produtos"></Route>
+                <Route element={<AdminTipos />} path="/admin/tipos"></Route>
             </Routes>
         </BrowserRouter>
     )

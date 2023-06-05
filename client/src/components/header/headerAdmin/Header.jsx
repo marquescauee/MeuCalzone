@@ -22,6 +22,10 @@ const Header = () => {
                         <li className="nav-item">
                             <Link className="nav-link text-light" to={"/admin/produtos"}>Produtos</Link>
                         </li>
+
+                        <li className="nav-item">
+                            <Link className="nav-link text-light" to={"/admin/tipos"}>Tipos de Produto</Link>
+                        </li>
                     </ul>
 
                     <div className="dropdown">
