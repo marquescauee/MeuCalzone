@@ -11,7 +11,7 @@ const CreateModal = () => {
 
             <div className="modal fade" id="ModalCreateProduto" tabIndex="-1" aria-labelledby="ModalCreateProduto" aria-hidden="true">
                 <div className="modal-dialog">
-                    <div className="modal-content">
+                    <div className="modal-content text-light bg-dark">
                         <div className="modal-header">
                             <h5 className="modal-title" id="modalCreateTitle">Adicionar Produto</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -41,7 +41,7 @@ const CreateModal = () => {
                                     <input type="password" className="form-control" id="passwordCreateProduct"/>
                                 </div>
                                 <div className="modal-footer border-0">
-                                    <button type="button" className="btn btn-outline-dark" data-bs-dismiss="modal">Voltar</button>
+                                    <button type="button" className="btn btn-outline-light" data-bs-dismiss="modal">Voltar</button>
                                     <button type="submit" className="btn btn-warning">Salvar</button>
                                 </div>
                             </form>

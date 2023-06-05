@@ -7,7 +7,7 @@ const LoginCadastro = () => {
     return (
         <>
             <Header />
-            <div className="d-flex justify-content-evenly align-items-center">
+            <div className="d-flex justify-content-evenly">
                 <Login />
                 <Register />
             </div>

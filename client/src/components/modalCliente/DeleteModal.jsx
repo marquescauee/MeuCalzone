@@ -11,7 +11,7 @@ const DeleteModal = ({resetEstados, deletarCliente, nome}) => {
 
             <div className="modal fade" id="ModalDeleteCliente" tabIndex="-1" aria-labelledby="ModalDeleteCliente" aria-hidden="true">
                 <div className="modal-dialog">
-                    <div className="modal-content text-dark modalEdit">
+                    <div className="modal-content text-light bg-dark modalEdit">
                         <div className="modal-header">
                             <h5 className="modal-title" id="titleDeleteCliente">Remover Cliente</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -22,7 +22,7 @@ const DeleteModal = ({resetEstados, deletarCliente, nome}) => {
                                     <h5>Tem certeza que deseja remover {nome}</h5>
                                 </div>
                                 <div className="modal-footer border-0">
-                                    <button type="button" className="btn btn-outline-dark" data-bs-dismiss="modal" onClick={resetEstados}>Voltar</button>
+                                    <button type="button" className="btn btn-outline-light" data-bs-dismiss="modal" onClick={resetEstados}>Voltar</button>
                                     <button type="submit" className="btn btn-outline-danger" onClick={deletarCliente}>Remover</button>
                                 </div>
                             </form>

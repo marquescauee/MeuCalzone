@@ -11,14 +11,20 @@ const AdminClientes = () => {
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
     const [cpf, setCpf] = useState('')
-    const [endereco, setEndereco] = useState('')
+    const [rua, setRua] = useState('')
+    const [numero, setNumero] = useState(0)
+    const [bairro, setBairro] = useState('')
+    const [cidade, setCidade] = useState('')
     const [senha, setSenha] = useState('')
 
     const resetEstados = () => {
         setNome('')
         setEmail('')
         setCpf('')
-        setEndereco('')
+        setRua('')
+        setNumero(0)
+        setBairro('')
+        setCidade('')
         setSenha('')
     }
 
@@ -39,7 +45,7 @@ const AdminClientes = () => {
             </div>
             <div className="box">
                 <div className="opcaoSol">
-                    <CreateModal setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf} setEndereco={setEndereco} endereco={endereco} setSenha={setSenha} senha={senha} resetEstados={resetEstados}/>
+                    <CreateModal setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf}  setSenha={setSenha} senha={senha} resetEstados={resetEstados} setRua={setRua} rua={rua} setNumero={setNumero} numero={numero} setBairro={setBairro} bairro={bairro} setCidade={setCidade} cidade={cidade}/>
 
                 </div>
                 <div className="textArea">
@@ -62,7 +68,7 @@ const AdminClientes = () => {
                                     </td>
 
                                     <td>
-                                        <EditModal editarCliente={editarCliente} setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf} setEndereco={setEndereco} endereco={endereco} setSenha={setSenha} senha={senha} resetEstados={resetEstados}   />
+                                        <EditModal editarCliente={editarCliente} setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf} setRua={setRua} rua={rua} setNumero={setNumero} numero={numero} setBairro={setBairro} bairro={bairro} setCidade={setCidade} cidade={cidade} setSenha={setSenha} senha={senha} resetEstados={resetEstados}   />
                                     </td>
 
                                     <td>

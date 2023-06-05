@@ -19,3 +19,11 @@ label {
     background-color: #FFC107;
     opacity: 1;
 }
+
+.margemEsquerda {
+    margin-left: 2.5rem;
+}
+
+.w-80 {
+    width: 80% !important;
+}
