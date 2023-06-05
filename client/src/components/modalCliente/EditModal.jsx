@@ -1,8 +1,8 @@
-const EditModal = () => {
+const EditModal = ({editarCliente, setNome, nome, setEmail, email, setCpf, cpf, setEndereco, endereco, setSenha, senha, resetEstados}) => {
 
     return (
         <>
-            <button type="button" className="link-tabela botaoEditar" data-bs-toggle="modal" data-bs-target="#ModalEditCliente"
+            <button type="button" onClick={editarCliente} className="link-tabela botaoEditar" data-bs-toggle="modal" data-bs-target="#ModalEditCliente"
                 aria-current="page">
                 <div>
                     <h2 className="d-flex justify-content-center botaoEditar">Editar</h2>
@@ -20,7 +20,7 @@ const EditModal = () => {
                             <form action="#" method="PUT">
                                 <div className="mb-3">
                                     <label htmlFor="nome" className="form-label w-100">Nome</label>
-                                    <input type="text" className="form-control" id="nomeEditCliente" aria-describedby="nome" />
+                                    <input type="text" className="form-control" id="nomeEditCliente" aria-describedby="nome" value={nome} onChange={e => setNome(e.target.value)}/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="email" className="form-label w-100">Email</label>
@@ -41,7 +41,7 @@ const EditModal = () => {
                                     <input type="password" className="form-control" id="passwordEditCliente" />
                                 </div>
                                 <div className="modal-footer border-0">
-                                    <button type="button" className="btn btn-outline-dark" data-bs-dismiss="modal">Voltar</button>
+                                    <button type="button" onClick={resetEstados} className="btn btn-outline-dark" data-bs-dismiss="modal">Voltar</button>
                                     <button type="submit" className="btn btn-warning">Salvar</button>
                                 </div>
                             </form>

@@ -4,8 +4,32 @@ import CreateModal from "../../components/modalCliente/CreateModal"
 import EditModal from "../../components/modalCliente/EditModal"
 import DeleteModal from "../../components/modalCliente/DeleteModal"
 import '../../General.css'
+import { useState } from "react"
 
 const AdminClientes = () => {
+
+    const [nome, setNome] = useState('')
+    const [email, setEmail] = useState('')
+    const [cpf, setCpf] = useState('')
+    const [endereco, setEndereco] = useState('')
+    const [senha, setSenha] = useState('')
+
+    const resetEstados = () => {
+        setNome('')
+        setEmail('')
+        setCpf('')
+        setEndereco('')
+        setSenha('')
+    }
+
+    const editarCliente = () => {
+       setNome('oi')
+    }
+
+    const deletarCliente = () => {
+        console.log('removeu')
+    }
+
     return (
         <div>
             <Header />
@@ -15,7 +39,7 @@ const AdminClientes = () => {
             </div>
             <div className="box">
                 <div className="opcaoSol">
-                    <CreateModal />
+                    <CreateModal setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf} setEndereco={setEndereco} endereco={endereco} setSenha={setSenha} senha={senha} resetEstados={resetEstados}/>
 
                 </div>
                 <div className="textArea">
@@ -38,11 +62,11 @@ const AdminClientes = () => {
                                     </td>
 
                                     <td>
-                                        <EditModal />
+                                        <EditModal editarCliente={editarCliente} setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf} setEndereco={setEndereco} endereco={endereco} setSenha={setSenha} senha={senha} resetEstados={resetEstados}   />
                                     </td>
 
                                     <td>
-                                        <DeleteModal />
+                                        <DeleteModal deletarCliente={deletarCliente} resetEstados={resetEstados} nome={nome}/>
                                     </td>
                                 </tr>
 

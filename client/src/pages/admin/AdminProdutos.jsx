@@ -1,14 +1,10 @@
 import Header from "../../components/header/headerAdmin/Header"
 import Footer from "../../components/footer/Footer"
 import CreateModal from "../../components/modalProduto/CreateModal"
-import { useState } from "react"
 import EditModal from "../../components/modalProduto/EditModal"
 import DeleteModal from "../../components/modalProduto/DeleteModal"
 
 const AdminProduto = () => {
-
-    const [nome, setNome] = useState('')
-
     return (
         <div>
             <Header />
@@ -18,7 +14,7 @@ const AdminProduto = () => {
             </div>
             <div className="box">
                 <div className="opcaoSol">
-                    <CreateModal setNome={setNome} nome={nome} />
+                    <CreateModal />
                 </div>
                 <div className="textArea">
                     <div className="table">

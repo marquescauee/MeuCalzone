@@ -19,7 +19,7 @@ const EditModal = () => {
                             <form action="#" method="PUT">
                                 <div className="mb-3">
                                     <label htmlFor="nome" className="form-label w-100">Nome</label>
-                                    <input type="text" className="form-control" id="nomeEditProduct" aria-describedby="nome" />
+                                    <input type="text" className="form-control" id="nomeEditProduct" aria-describedby="nome"/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="email" className="form-label w-100">Email</label>

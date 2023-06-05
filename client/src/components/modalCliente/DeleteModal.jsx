@@ -1,4 +1,4 @@
-const DeleteModal = () => {
+const DeleteModal = ({resetEstados, deletarCliente, nome}) => {
 
     return (
         <>
@@ -19,11 +19,11 @@ const DeleteModal = () => {
                         <div className="modal-body">
                             <form action="#" method="DELETE">
                                 <div>
-                                    <h5>Tem certeza que deseja remover Trazer do banco?</h5>
+                                    <h5>Tem certeza que deseja remover {nome}</h5>
                                 </div>
                                 <div className="modal-footer border-0">
-                                    <button type="button" className="btn btn-outline-dark" data-bs-dismiss="modal">Voltar</button>
-                                    <button type="submit" className="btn btn-outline-danger">Remover</button>
+                                    <button type="button" className="btn btn-outline-dark" data-bs-dismiss="modal" onClick={resetEstados}>Voltar</button>
+                                    <button type="submit" className="btn btn-outline-danger" onClick={deletarCliente}>Remover</button>
                                 </div>
                             </form>
                         </div>

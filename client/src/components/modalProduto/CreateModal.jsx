@@ -1,4 +1,4 @@
-const CreateModal = ({setNome, nome}) => {
+const CreateModal = () => {
 
     return (
         <>
@@ -20,11 +20,11 @@ const CreateModal = ({setNome, nome}) => {
                             <form action="#" method="POST">
                                 <div className="mb-3">
                                     <label htmlFor="nome" className="form-label w-100">Nome</label>
-                                    <input type="text" className="form-control" id="nomeCreateProduct" aria-describedby="nome" value={nome} onChange={(e) => {setNome(e.target.value); console.log(nome)}} />
+                                    <input type="text" className="form-control" id="nomeCreateProduct" aria-describedby="nome"/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="email" className="form-label w-100">Email</label>
-                                    <input type="email" className="form-control" id="emailCreateProduct" aria-describedby="emailHelp" />
+                                    <input type="email" className="form-control" id="emailCreateProduct" aria-describedby="emailHelp"  />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="cpf" className="form-label w-100">CPF</label>
@@ -33,12 +33,12 @@ const CreateModal = ({setNome, nome}) => {
 
                                 <div className="mb-3">
                                     <label htmlFor="endereco" className="form-label w-100">Endereço</label>
-                                    <input type="text" className="form-control" id="enderecoCreateProduct" />
+                                    <input type="text" className="form-control" id="enderecoCreateProduct"/>
                                 </div>
 
                                 <div className="mb-3">
                                     <label htmlFor="password" className="form-label w-100">Senha</label>
-                                    <input type="password" className="form-control" id="passwordCreateProduct" />
+                                    <input type="password" className="form-control" id="passwordCreateProduct"/>
                                 </div>
                                 <div className="modal-footer border-0">
                                     <button type="button" className="btn btn-outline-dark" data-bs-dismiss="modal">Voltar</button>
