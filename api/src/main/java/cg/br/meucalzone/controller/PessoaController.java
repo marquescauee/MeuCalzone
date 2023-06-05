@@ -27,79 +27,80 @@ public class PessoaController {
 
 	private PessoaRepository pessoaRepository;
 	private EnderecoRepository enderecoRepository;
-	
+
 	public PessoaController(PessoaRepository pessoaRepository, EnderecoRepository enderecoRepository) {
 		this.pessoaRepository = pessoaRepository;
 		this.enderecoRepository = enderecoRepository;
 	}
-	
+
 	@GetMapping
 	public ResponseEntity<List<Pessoa>> getPessoas() {
 		List<Pessoa> pessoas = pessoaRepository.findAll();
-		
+
 		return ResponseEntity.status(HttpStatus.OK).body(pessoas);
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<Object> savePessoa(@RequestBody @Valid Pessoa pessoa) {
 		try {
 			Optional<Endereco> enderecoBanco = enderecoRepository.findById(pessoa.getEndereco().getIdEndereco());
-			pessoa.setEndereco(enderecoBanco.get());
+			if (enderecoBanco.isPresent()) {
+				pessoa.setEndereco(enderecoBanco.get());
+			}
 			pessoaRepository.save(pessoa);
 			return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Corpo da requisição inválido");
 		}
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getPessoa(@PathVariable(value = "id") int id) {
 		Optional<Pessoa> pessoa = pessoaRepository.findById(id);
-		
-		if(pessoa.isPresent()) {
+
+		if (pessoa.isPresent()) {
 			return ResponseEntity.status(HttpStatus.OK).body(pessoa);
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada");
 		}
 	}
-	
+
 	@PutMapping("/{id}")
-	public ResponseEntity<Object> updatePessoa(@PathVariable(value = "id") int id, @RequestBody @Valid Pessoa pessoaRequest) {
-		
+	public ResponseEntity<Object> updatePessoa(@PathVariable(value = "id") int id,
+			@RequestBody @Valid Pessoa pessoaRequest) {
+
 		Optional<Pessoa> pessoaBanco = pessoaRepository.findById(id);
-			
-		if(!pessoaBanco.isPresent())
+
+		if (!pessoaBanco.isPresent())
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada");
-		
+
 		Optional<Endereco> enderecoBanco = enderecoRepository.findById(pessoaRequest.getEndereco().getIdEndereco());
-		
+
 		Pessoa pessoa = pessoaBanco.get();
 
-		if(pessoaBanco.isPresent()) {
-			pessoa.setCpf(pessoaRequest.getCpf());
-			pessoa.setEmail(pessoaRequest.getEmail());
-			pessoa.setNome(pessoaRequest.getNome());
-			pessoa.setSenha(pessoaRequest.getSenha());
-			pessoa.setTipo(pessoaRequest.getTipo());
-			
-			if(enderecoBanco.isPresent()) {
-				pessoa.setEndereco(enderecoBanco.get());
-			}
+		pessoa.setCpf(pessoaRequest.getCpf());
+		pessoa.setEmail(pessoaRequest.getEmail());
+		pessoa.setNome(pessoaRequest.getNome());
+		pessoa.setSenha(pessoaRequest.getSenha());
+		pessoa.setTipo(pessoaRequest.getTipo());
+
+		if (enderecoBanco.isPresent()) {
+			pessoa.setEndereco(enderecoBanco.get());
 		}
-		
-		 return ResponseEntity.status(HttpStatus.OK).body(pessoaRepository.save(pessoa));
+
+		return ResponseEntity.status(HttpStatus.OK).body(pessoaRepository.save(pessoa));
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> deletePessoa(@PathVariable(value="id") int id) {
-		  Optional<Pessoa> pessoaOptional = pessoaRepository.findById(id);
+	public ResponseEntity<Object> deletePessoa(@PathVariable(value = "id") int id) {
+		Optional<Pessoa> pessoaOptional = pessoaRepository.findById(id);
 
-	        if(!pessoaOptional.isPresent()) {
-	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada");
-	        }
+		if (!pessoaOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada");
+		}
 
-	        pessoaRepository.delete(pessoaOptional.get());
+		pessoaRepository.delete(pessoaOptional.get());
 
-	        return ResponseEntity.status(HttpStatus.OK).body("Pessoa removida com sucesso");
+		return ResponseEntity.status(HttpStatus.OK).body("Pessoa removida com sucesso");
 	}
 }

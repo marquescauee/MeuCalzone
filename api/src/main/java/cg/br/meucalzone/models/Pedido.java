@@ -53,12 +53,12 @@ public class Pedido {
         return formaEntrega;
     }
 
-    public int getId_pedido() {
+    public int getIdPedido() {
         return idPedido;
     }
 
-    public void setId_pedido(int id_pedido) {
-        this.idPedido = id_pedido;
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
     }
 
     public Pessoa getPessoa() {
