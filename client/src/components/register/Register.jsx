@@ -88,7 +88,7 @@ const Register = () => {
                                             required />
                                     </div>
                                 </div>
-                                <div className="row mb-5 d-block">
+                                <div className="row mb-4 d-block">
                                     <label htmlFor="password"
                                         className="lb-login col-md-4 col-form-label">Senha:</label>
 

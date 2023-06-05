@@ -2,8 +2,8 @@ import './login.css'
 
 const Login = () => {
     return (
-        <div className='divLogin'>
-            <div className="row justify-content-center">
+        <div className='divLogin d-flex'>
+            <div className="row justify-content-center d-flex align-self-center ">
                 <div className="col-md-8">
                     <div className="card mt-5">
                         <div className="cabeca-card mt-5 display-5">Login</div>
