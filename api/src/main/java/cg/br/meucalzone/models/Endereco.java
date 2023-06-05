@@ -82,8 +82,15 @@ public class Endereco {
         this.cidade = cidade;
     }
 
+    public Pessoa getPessoa() {
+		return pessoa;
+	}
 
-    @Override
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	@Override
     public String toString() {
         return "{" +
             " idEndereco='" + getIdEndereco() + "'" +
