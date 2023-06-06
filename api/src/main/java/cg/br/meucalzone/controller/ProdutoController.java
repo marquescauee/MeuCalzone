@@ -5,7 +5,6 @@ import cg.br.meucalzone.models.TipoProduto;
 import cg.br.meucalzone.repository.ProdutoRepository;
 import cg.br.meucalzone.repository.TipoProdutoRepository;
 import jakarta.validation.Valid;
-import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

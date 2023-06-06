@@ -69,6 +69,7 @@ const FormPedido = () => {
     }
 
     const removeCalzone = (calzone) => {
+        console.log(calzones)
         let newCalzonesArray = calzones.filter(c => c.id !== calzone.id)
         setCalzones(newCalzonesArray)
 
