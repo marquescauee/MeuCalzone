@@ -24,13 +24,6 @@ public class Pedido {
     @JoinColumn(name = "idPessoa", nullable = false)
     private Pessoa pessoa;
 
-    @OneToMany(mappedBy = "pedido")
-    private List<ItemPedido> itensPedido;
-
-    public void addItemPedido(ItemPedido ip) {
-        this.itensPedido.add(ip);
-    }
-
     public Pedido() {}
 
     public Pedido(double valorTotal, String formaEntrega) {

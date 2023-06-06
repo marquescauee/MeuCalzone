@@ -35,9 +35,6 @@ public class ProdutoController {
     @PostMapping
     public ResponseEntity<Object> saveProduto(@RequestBody @Valid Produto produto) {
         try {
-            TipoProduto tipoProduto = new TipoProduto(produto.getTipo().getTipo(), produto.getTipo().getDescricao());
-            tipoProdutoRepository.save(tipoProduto);
-            produto.setTipo(tipoProduto);
             produtoRepository.save(produto);
             return ResponseEntity.status(HttpStatus.CREATED).body(produto);
         } catch (Exception e) {

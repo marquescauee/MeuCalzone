@@ -32,22 +32,13 @@ public class Pessoa {
     @NotBlank
     private String senha;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idEndereco", nullable = false)
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "pessoa")
-    private List<Pedido> pedidos;
-
-    public void addPedido(Pedido pedido) {
-        this.pedidos.add(pedido);
-    }
-
     public Pessoa() {}
 
     public Pessoa(String nome, String cpf, String email) {
-        this.pedidos = new ArrayList<>();
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
