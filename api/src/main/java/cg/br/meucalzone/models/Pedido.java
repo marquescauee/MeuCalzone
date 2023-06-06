@@ -1,8 +1,9 @@
 package cg.br.meucalzone.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
@@ -13,10 +14,10 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPedido;
 
-    @NotEmpty
+    @NotNull
     private double valorTotal;
 
-    @NotEmpty
+    @NotBlank
     private String formaEntrega;
 
     @ManyToOne

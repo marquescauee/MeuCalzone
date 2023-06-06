@@ -1,13 +1,13 @@
 package cg.br.meucalzone.models;
 
-import javax.validation.constraints.NotEmpty;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "enderecos")
@@ -17,20 +17,17 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEndereco;
 
-    @NotEmpty
+    @NotBlank
     private String rua;
     
-    @NotEmpty
+    @NotNull
     private int numero;
 
-    @NotEmpty
+    @NotBlank
     private String bairro;
     
-    @NotEmpty
+    @NotBlank
     private String cidade;
-
-    @OneToOne(mappedBy = "endereco")
-    private Pessoa pessoa;
 
     public Endereco() {}
 
@@ -81,14 +78,6 @@ public class Endereco {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
-
-    public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
 
 	@Override
     public String toString() {

@@ -1,8 +1,9 @@
 package cg.br.meucalzone.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "itens_pedidos")
@@ -17,7 +18,7 @@ public class ItemPedido {
     @JoinColumn(name = "idProduto", nullable = false)
     private Produto produto;
 
-    @NotEmpty
+    @NotNull
     private int qtdItensPedido;
 
     public ItemPedido() {}

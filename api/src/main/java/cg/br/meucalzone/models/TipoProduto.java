@@ -1,9 +1,9 @@
 package cg.br.meucalzone.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -17,7 +17,7 @@ public class TipoProduto {
     @Size(max = 1)
     private String tipo;
 
-    @NotEmpty
+    @NotBlank
     private String descricao;
 
     @OneToMany(mappedBy = "idTipo")

@@ -1,10 +1,8 @@
 package cg.br.meucalzone.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,24 +15,24 @@ public class Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPessoa;
 
-    @NotEmpty
+    @NotBlank
     private String nome;
 
     @Pattern(regexp="[\\d]{11}")
-    @NotEmpty
+    @NotBlank
     private String cpf;
 
-    @NotEmpty
+    @NotBlank
     private String email;
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 1)
     private String tipo;
 
-    @NotEmpty
+    @NotBlank
     private String senha;
 
-    @NotEmpty
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idEndereco", nullable = false)
     private Endereco endereco;
