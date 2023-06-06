@@ -20,9 +20,6 @@ public class TipoProduto {
     @NotBlank
     private String descricao;
 
-    @OneToMany(mappedBy = "idTipo")
-    private List<Produto> produtos;
-
     public TipoProduto() {}
 
     public TipoProduto(String tipo, String descricao) {
@@ -53,14 +50,6 @@ public class TipoProduto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public List<Produto> getProdutos() {
-        return this.produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
     }
 
     @Override

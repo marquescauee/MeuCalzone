@@ -17,31 +17,19 @@ public class Produto {
     @NotBlank
     private String descricao;
 
-    @NotBlank
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "idTipoProduto")
-    private TipoProduto idTipo;
-
-    @OneToMany(mappedBy = "produto")
-    private List<ItemPedido> itensPedido;
+    private TipoProduto tipo;
 
     @NotNull
     private int qtd;
 
     public Produto() {}
 
-    public List<ItemPedido> getItensPedido() {
-        return itensPedido;
-    }
-
-    public void addItemPedido(ItemPedido ip) {
-        this.itensPedido.add(ip);
-    }
-
-    public Produto(int idProduto, String descricao, TipoProduto idTipo, int qtd) {
-        this.idProduto = idProduto;
+    public Produto(String descricao, TipoProduto tipo, int qtd) {
         this.descricao = descricao;
-        this.idTipo = idTipo;
+        this.tipo = tipo;
         this.qtd = qtd;
     }
 
@@ -61,12 +49,12 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public TipoProduto getIdTipo() {
-        return idTipo;
+    public TipoProduto getTipo() {
+        return tipo;
     }
 
-    public void setIdTipo(TipoProduto idTipo) {
-        this.idTipo = idTipo;
+    public void setTipo(TipoProduto tipo) {
+        this.tipo = tipo;
     }
 
     public int getQtd() {
@@ -82,7 +70,7 @@ public class Produto {
         return "Produto{" +
                 "idProduto=" + idProduto +
                 ", descricao='" + descricao + '\'' +
-                ", idTipo=" + idTipo +
+                ", tipo=" + tipo +
                 ", qtd=" + qtd +
                 '}';
     }
