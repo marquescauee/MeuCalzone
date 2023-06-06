@@ -1,14 +1,12 @@
-import { useEffect } from "react"
+const EditModal = ({setNome, nome, setEmail, email, setCpf, cpf,  setSenha, senha, resetEstados, setRua, rua, setNumero, numero, setBairro, bairro, setCidade, cidade,  sucesso, setSucesso, falha, setFalha, nomeVazio, setNomeVazio, emailVazio, setEmailVazio, cpfVazio, setCpfVazio, senhaVazia, setSenhaVazia, numeroVazio, setNumeroVazio, setBairroVazio, bairroVazio, setCidadeVazia, cidadeVazia, setRuaVazia, ruaVazia, resetMessagensBanner}) => {
 
-const EditModal = ({editarCliente, setNome, nome, setEmail, email, setCpf, cpf,  setSenha, senha, resetEstados, setRua, rua, setNumero, numero, setBairro, bairro, setCidade, cidade,  sucesso, setSucesso, falha, setFalha, nomeVazio, setNomeVazio, emailVazio, setEmailVazio, cpfVazio, setCpfVazio, senhaVazia, setSenhaVazia, numeroVazio, setNumeroVazio, setBairroVazio, bairroVazio, setCidadeVazia, cidadeVazia, setRuaVazia, ruaVazia}) => {
-
-    useEffect(() => {
-
-    }, [resetEstados])
+    const recuperarCliente = () => {
+        setNome('oi')
+    }
 
     return (
         <>
-            <button type="button" onClick={editarCliente} className="link-tabela botaoEditar" data-bs-toggle="modal" data-bs-target="#ModalEditCliente"
+            <button type="button" onClick={recuperarCliente} className="link-tabela botaoEditar" data-bs-toggle="modal" data-bs-target="#ModalEditCliente"
                 aria-current="page">
                 <div>
                     <h2 className="d-flex justify-content-center botaoEditar">Editar</h2>
@@ -76,7 +74,7 @@ const EditModal = ({editarCliente, setNome, nome, setEmail, email, setCpf, cpf, 
                                     <input type="password" className="form-control" id="passwordEditCliente"  value={senha} onChange={(e) => setSenha(e.target.value)} />
                                 </div>
                                 <div className="modal-footer border-0">
-                                    <button type="button" onClick={resetEstados} className="btn btn-outline-light" data-bs-dismiss="modal">Voltar</button>
+                                    <button type="button" onClick={resetMessagensBanner} className="btn btn-outline-light" data-bs-dismiss="modal">Voltar</button>
                                     <button type="submit" className="btn btn-warning">Salvar</button>
                                 </div>
                             </form>

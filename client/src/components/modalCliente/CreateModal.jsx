@@ -1,13 +1,12 @@
 import './modalCliente.css'
 
-const CreateModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, senha, resetEstados, setRua, rua, setNumero, numero, setBairro, bairro, setCidade, cidade, sucesso, setSucesso, falha, setFalha, nomeVazio, setNomeVazio, emailVazio, setEmailVazio, cpfVazio, setCpfVazio, senhaVazia, setSenhaVazia, numeroVazio, setNumeroVazio, setBairroVazio, bairroVazio, setCidadeVazia, cidadeVazia, setRuaVazia, ruaVazia, resetErros }) => {
+const CreateModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, senha, resetEstados, setRua, rua, setNumero, numero, setBairro, bairro, setCidade, cidade, sucesso, setSucesso, falha, setFalha, nomeVazio, setNomeVazio, emailVazio, setEmailVazio, cpfVazio, setCpfVazio, senhaVazia, setSenhaVazia, numeroVazio, setNumeroVazio, setBairroVazio, bairroVazio, setCidadeVazia, cidadeVazia, setRuaVazia, ruaVazia, resetErros, resetMessagensBanner, recuperarCliente}) => {
 
     const handleSubmit = async (e) => {
 
         e.preventDefault()
         resetErros()
-        setSucesso(false)
-        setFalha(false)
+        resetMessagensBanner()
 
         if (!nome.trim())
             setNomeVazio(true)
@@ -65,6 +64,7 @@ const CreateModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, se
             });
             setSucesso(true)
             setFalha(false)
+            recuperarCliente()
             resetEstados()
             return response.json()
 
@@ -162,7 +162,7 @@ const CreateModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, se
                                     {senhaVazia && <div className="mt-2 texto-erro">A senha deve possuir 8 caracteres.</div>}
                                 </div>
                                 <div className="modal-footer border-0">
-                                    <button type="button" className="btn btn-outline-light" data-bs-dismiss="modal" onClick={resetEstados}>Voltar</button>
+                                    <button type="button" className="btn btn-outline-light" data-bs-dismiss="modal" onClick={resetMessagensBanner}>Voltar</button>
                                     <button className="btn btn-warning" id="botaoSalvarCliente" data-bs-dismiss="modal" onClick={handleSubmit}>Salvar</button>
                                 </div>
                             </form>
