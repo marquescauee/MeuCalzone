@@ -16,6 +16,7 @@ const AdminClientes = () => {
     const [bairro, setBairro] = useState('')
     const [cidade, setCidade] = useState('')
     const [senha, setSenha] = useState('')
+
     const [clientes, setClientes] = useState([])
 
     const [sucesso, setSucesso] = useState(false)
@@ -30,7 +31,7 @@ const AdminClientes = () => {
     const [bairroVazio, setBairroVazio] = useState(false)
     const [cidadeVazia, setCidadeVazia] = useState(false)
 
-    const recuperarCliente = async () => {
+    const recuperarClientes = async () => {
         try {
             const response = await fetch('http://localhost:8080/api/pessoas', {
                 method: "GET",
@@ -44,6 +45,14 @@ const AdminClientes = () => {
             });
 
             const data = await response.json()
+            data.sort((a, b) => {
+                if(a.nome > b.nome)
+                    return 1
+                if(a.nome < b.nome)
+                    return -1
+                return 0
+            })
+            console.log(data)
             setClientes(data)
             return data
 
@@ -52,8 +61,37 @@ const AdminClientes = () => {
         }
     }
 
+    const recuperarCliente = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/pessoas/${id}`, {
+                method: "GET",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                redirect: "follow",
+                referrerPolicy: "no-referrer",
+            });
+
+            const data = await response.json()
+            setNome(data.nome)
+            setEmail(data.email)
+            setCpf(data.cpf)
+            setRua(data.endereco.rua)
+            setNumero(data.endereco.numero)
+            setBairro(data.endereco.bairro)
+            setCidade(data.endereco.cidade)
+            setSenha(data.senha)
+            return data
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     useEffect(() => {
-        recuperarCliente()
+        recuperarClientes()
     }, [])
 
     const resetEstados = () => {
@@ -76,7 +114,7 @@ const AdminClientes = () => {
     }
 
     const resetMessagensBanner = () => {
-        setSucesso(false)
+        setSucesso('')
         setFalha(false)
     }
 
@@ -93,25 +131,21 @@ const AdminClientes = () => {
         setFalha(false)
     }
 
-    const deletarCliente = () => {
-        console.log('removeu')
-    }
-
 
     return (
         <div>
             <Header />
 
-            {falha && <div className="fundo-erro mx-auto">Houve um erro na inclusão. Abra o Modal novamente para visualizar o erro.</div>}
+            {falha && <div className="fundo-erro mx-auto">Houve um erro na operação. Abra o Modal novamente para visualizar o erro.</div>}
 
-            {sucesso && <div className="fundo-sucesso mx-auto">Cliente Cadastrado com sucesso!</div>}
+            {sucesso && <div className="fundo-sucesso mx-auto">{sucesso}</div>}
 
             <div className="my-5">
                 <h1 className="text-light">Clientes</h1>
             </div>
             <div className="box">
                 <div className="opcaoSol">
-                    <CreateModal setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf} setSenha={setSenha} senha={senha} resetEstados={resetEstados} setRua={setRua} rua={rua} setNumero={setNumero} numero={numero} setBairro={setBairro} bairro={bairro} setCidade={setCidade} cidade={cidade} setSucesso={setSucesso} sucesso={sucesso} setFalha={setFalha} falha={falha} setBairroVazio={setBairroVazio} bairroVazio={bairroVazio} setCidadeVazia={setCidadeVazia} cidadeVazia={cidadeVazia} setNumeroVazio={setNumeroVazio} numeroVazio={numeroVazio} setRuaVazia={setRuaVazia} ruaVazia={ruaVazia} setSenhaVazia={setSenhaVazia} senhaVazia={senhaVazia} setCpfVazio={setCpfVazio} cpfVazio={cpfVazio} setEmailVazio={setEmailVazio} emailVazio={emailVazio} setNomeVazio={setNomeVazio} nomeVazio={nomeVazio} resetErros={resetErros} resetMessagensBanner={resetMessagensBanner} recuperarCliente={recuperarCliente}/>
+                    <CreateModal setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf} setSenha={setSenha} senha={senha} resetEstados={resetEstados} setRua={setRua} rua={rua} setNumero={setNumero} numero={numero} setBairro={setBairro} bairro={bairro} setCidade={setCidade} cidade={cidade} setSucesso={setSucesso} setFalha={setFalha} setBairroVazio={setBairroVazio} bairroVazio={bairroVazio} setCidadeVazia={setCidadeVazia} cidadeVazia={cidadeVazia} setNumeroVazio={setNumeroVazio} numeroVazio={numeroVazio} setRuaVazia={setRuaVazia} ruaVazia={ruaVazia} setSenhaVazia={setSenhaVazia} senhaVazia={senhaVazia} setCpfVazio={setCpfVazio} cpfVazio={cpfVazio} setEmailVazio={setEmailVazio} emailVazio={emailVazio} setNomeVazio={setNomeVazio} nomeVazio={nomeVazio} resetErros={resetErros} resetMessagensBanner={resetMessagensBanner} recuperarClientes={recuperarClientes} />
 
                 </div>
                 <div className="textArea">
@@ -131,16 +165,15 @@ const AdminClientes = () => {
                                             <td>{c.nome}</td>
                                             <td>{c.cpf}</td>
                                             <td>
-                                                <EditModal setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf} setRua={setRua} rua={rua} setNumero={setNumero} numero={numero} setBairro={setBairro} bairro={bairro} setCidade={setCidade} cidade={cidade} setSenha={setSenha} senha={senha} resetEstados={resetEstados} setSucesso={setSucesso} sucesso={sucesso} setFalha={setFalha} falha={falha} setBairroVazio={setBairroVazio} bairroVazio={bairroVazio} setCidadeVazia={setCidadeVazia} cidadeVazia={cidadeVazia} setNumeroVazio={setNumeroVazio} numeroVazio={numeroVazio} setRuaVazia={setRuaVazia} ruaVazia={ruaVazia} setSenhaVazia={setSenhaVazia} senhaVazia={senhaVazia} setCpfVazio={cpfVazio} cpfVazio={cpfVazio} setEmailVazio={setEmailVazio} emailVazio={emailVazio} setNomeVazio={setNomeVazio} nomeVazio={nomeVazio} resetErros={resetErros} resetMessagensBanner={resetMessagensBanner} />
+                                                <EditModal setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf} setRua={setRua} rua={rua} setNumero={setNumero} numero={numero} setBairro={setBairro} bairro={bairro} setCidade={setCidade} cidade={cidade} setSenha={setSenha} senha={senha} resetEstados={resetEstados} setSucesso={setSucesso} sucesso={sucesso} setFalha={setFalha} falha={falha} setBairroVazio={setBairroVazio} bairroVazio={bairroVazio} setCidadeVazia={setCidadeVazia} cidadeVazia={cidadeVazia} setNumeroVazio={setNumeroVazio} numeroVazio={numeroVazio} setRuaVazia={setRuaVazia} ruaVazia={ruaVazia} setSenhaVazia={setSenhaVazia} senhaVazia={senhaVazia} setCpfVazio={setCpfVazio} cpfVazio={cpfVazio} setEmailVazio={setEmailVazio} emailVazio={emailVazio} setNomeVazio={setNomeVazio} nomeVazio={nomeVazio} resetErros={resetErros} resetMessagensBanner={resetMessagensBanner} recuperarCliente={recuperarCliente} id={c.id} recuperarClientes={recuperarClientes} />
                                             </td>
 
                                             <td>
-                                                <DeleteModal deletarCliente={deletarCliente} resetEstados={resetEstados} nome={nome} />
+                                                <DeleteModal setSucesso={setSucesso} setFalha={setFalha} resetEstados={resetEstados} nome={nome} id={c.id} recuperarClientes={recuperarClientes} resetEstados={resetEstados}/>
                                             </td>
                                         </tr>
                                     })
                                 }
-                                
 
                             </tbody>
                         </table>

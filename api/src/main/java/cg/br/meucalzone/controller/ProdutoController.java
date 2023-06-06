@@ -37,7 +37,7 @@ public class ProdutoController {
             produtoRepository.save(produto);
             return ResponseEntity.status(HttpStatus.CREATED).body(produto);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Corpo da requisição inválido");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("\"Corpo da requisição inválido\"");
         }
     }
 
@@ -48,7 +48,7 @@ public class ProdutoController {
         if(produto.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(produto);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("\"Produto não encontrado\"");
         }
     }
 
@@ -57,7 +57,7 @@ public class ProdutoController {
         Optional<Produto> produtoBanco = produtoRepository.findById(id);
 
         if(!produtoBanco.isPresent())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("\"Produto não encontrado\"");
 
         Produto produto = produtoBanco.get();
 
@@ -82,10 +82,10 @@ public class ProdutoController {
         Optional<Produto> produtoOptional = produtoRepository.findById(id);
 
         if(!produtoOptional.isPresent())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("\"Produto não encontrado\"");
 
         produtoRepository.delete(produtoOptional.get());
 
-        return ResponseEntity.status(HttpStatus.OK).body("Produto removido com sucesso");
+        return ResponseEntity.status(HttpStatus.OK).body("\"Produto removido com sucesso\"");
     }
 }

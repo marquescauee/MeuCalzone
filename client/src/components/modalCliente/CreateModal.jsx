@@ -1,6 +1,6 @@
 import './modalCliente.css'
 
-const CreateModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, senha, resetEstados, setRua, rua, setNumero, numero, setBairro, bairro, setCidade, cidade, sucesso, setSucesso, falha, setFalha, nomeVazio, setNomeVazio, emailVazio, setEmailVazio, cpfVazio, setCpfVazio, senhaVazia, setSenhaVazia, numeroVazio, setNumeroVazio, setBairroVazio, bairroVazio, setCidadeVazia, cidadeVazia, setRuaVazia, ruaVazia, resetErros, resetMessagensBanner, recuperarCliente}) => {
+const CreateModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, senha, resetEstados, setRua, rua, setNumero, numero, setBairro, bairro, setCidade, cidade, setSucesso, setFalha, nomeVazio, setNomeVazio, emailVazio, setEmailVazio, cpfVazio, setCpfVazio, senhaVazia, setSenhaVazia, numeroVazio, setNumeroVazio, setBairroVazio, bairroVazio, setCidadeVazia, cidadeVazia, setRuaVazia, ruaVazia, resetErros, resetMessagensBanner, recuperarClientes}) => {
 
     const handleSubmit = async (e) => {
 
@@ -62,9 +62,9 @@ const CreateModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, se
                 referrerPolicy: "no-referrer",
                 body: JSON.stringify(data),
             });
-            setSucesso(true)
+            setSucesso('Cliente cadastrado com sucesso!')
             setFalha(false)
-            recuperarCliente()
+            recuperarClientes()
             resetEstados()
             return response.json()
 

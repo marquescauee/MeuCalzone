@@ -51,7 +51,7 @@ public class PessoaController {
 			pessoaRepository.save(pessoa);
 			return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Corpo da requisição inválido");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("\"Corpo da requisição inválido\"");
 		}
 	}
 
@@ -62,7 +62,7 @@ public class PessoaController {
 		if (pessoa.isPresent()) {
 			return ResponseEntity.status(HttpStatus.OK).body(pessoa);
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("\"Pessoa não encontrada\"");
 		}
 	}
 
@@ -73,7 +73,7 @@ public class PessoaController {
 		Optional<Pessoa> pessoaBanco = pessoaRepository.findById(id);
 
 		if (!pessoaBanco.isPresent())
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("\"Pessoa não encontrada\"");
 
 		Pessoa pessoa = pessoaBanco.get();
 
@@ -102,11 +102,11 @@ public class PessoaController {
 		Optional<Pessoa> pessoaOptional = pessoaRepository.findById(id);
 
 		if (!pessoaOptional.isPresent()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("\"Pessoa não encontrada\"");
 		}
 
 		pessoaRepository.delete(pessoaOptional.get());
 
-		return ResponseEntity.status(HttpStatus.OK).body("Pessoa removida com sucesso");
+		return ResponseEntity.status(HttpStatus.OK).body("\"Pessoa removida com sucesso!\"");
 	}
 }

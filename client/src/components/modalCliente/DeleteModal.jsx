@@ -1,4 +1,31 @@
-const DeleteModal = ({deletarCliente, nome}) => {
+const DeleteModal = ({nome, id, setSucesso, setFalha, recuperarClientes, resetEstados}) => {
+
+    const handleDelete = async (e) => {
+        e.preventDefault()
+
+        try {
+            const response = await fetch(`http://localhost:8080/api/pessoas/${id}`, {
+                method: "DELETE",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                redirect: "follow",
+                referrerPolicy: "no-referrer",
+            });
+            setSucesso('Cliente removido com sucesso!')
+            setFalha(false)
+            recuperarClientes()
+            resetEstados()
+            return response.json()
+
+        } catch (err) {
+            setFalha(true)
+            setSucesso(false)
+            console.log(err)
+        }
+    }
 
     return (
         <>
@@ -23,7 +50,7 @@ const DeleteModal = ({deletarCliente, nome}) => {
                                 </div>
                                 <div className="modal-footer border-0">
                                     <button type="button" className="btn btn-outline-light" data-bs-dismiss="modal">Voltar</button>
-                                    <button type="submit" className="btn btn-outline-danger" onClick={deletarCliente}>Remover</button>
+                                    <button type="submit" className="btn btn-outline-danger" data-bs-dismiss="modal" onClick={handleDelete}>Remover</button>
                                 </div>
                             </form>
                         </div>
