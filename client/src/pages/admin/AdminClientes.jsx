@@ -169,7 +169,7 @@ const AdminClientes = () => {
                                             </td>
 
                                             <td>
-                                                <DeleteModal setSucesso={setSucesso} setFalha={setFalha} resetEstados={resetEstados} nome={nome} id={c.id} recuperarClientes={recuperarClientes} resetEstados={resetEstados}/>
+                                                <DeleteModal setSucesso={setSucesso} setFalha={setFalha} resetEstados={resetEstados} nome={c.nome} id={c.id} recuperarClientes={recuperarClientes}/>
                                             </td>
                                         </tr>
                                     })
