@@ -96,3 +96,17 @@
   .overflow {
     overflow-x: hidden;
   }
+
+.fundo-erro {
+    background-color: rgb(250, 166, 166);
+    color: rgb(165, 4, 4);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.fundo-sucesso {
+  background-color: rgb(176, 250, 166);
+  color: rgb(16, 85, 33);
+  font-weight: bold;
+  font-size: 20px;
+}

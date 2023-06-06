@@ -1,4 +1,10 @@
-const EditModal = ({editarCliente, setNome, nome, setEmail, email, setCpf, cpf,  setSenha, senha, resetEstados, setRua, rua, setNumero, numero, setBairro, bairro, setCidade, cidade}) => {
+import { useEffect } from "react"
+
+const EditModal = ({editarCliente, setNome, nome, setEmail, email, setCpf, cpf,  setSenha, senha, resetEstados, setRua, rua, setNumero, numero, setBairro, bairro, setCidade, cidade,  sucesso, setSucesso, falha, setFalha, nomeVazio, setNomeVazio, emailVazio, setEmailVazio, cpfVazio, setCpfVazio, senhaVazia, setSenhaVazia, numeroVazio, setNumeroVazio, setBairroVazio, bairroVazio, setCidadeVazia, cidadeVazia, setRuaVazia, ruaVazia}) => {
+
+    useEffect(() => {
+
+    }, [resetEstados])
 
     return (
         <>
@@ -33,7 +39,7 @@ const EditModal = ({editarCliente, setNome, nome, setEmail, email, setCpf, cpf, 
 
                                 <div className="mb-3">
                                     <label htmlFor="rua" className="form-label w-100">Rua</label>
-                                    <input type="text" className="form-control" id="ruaCreateCliente"  value={rua} onChange={(e) => setRua(e.target.value)}  />
+                                    <input type="text" className="form-control" id="ruaEditCliente"  value={rua} onChange={(e) => setRua(e.target.value)}  />
                                 </div>
 
                                 <div className="mb-3 d-flex">
@@ -42,7 +48,7 @@ const EditModal = ({editarCliente, setNome, nome, setEmail, email, setCpf, cpf, 
                                             className="lb-login col-md-4 col-form-label ">Número:</label>
 
                                         <div className="col-md-3 d-flex  w-50">
-                                            <input id="numero" type="number" min="0"
+                                            <input id="numeroEdit" type="number" min="0"
                                                 className="form-control" name="numero"
                                                 required value={numero} onChange={(e) => setNumero(e.target.value)}/>
                                         </div>
@@ -53,7 +59,7 @@ const EditModal = ({editarCliente, setNome, nome, setEmail, email, setCpf, cpf, 
                                             className="lb-login col-md-4 col-form-label">Bairro:</label>
 
                                         <div className="col-md-4 d-flex w-80">
-                                            <input id="bairro" type="text"
+                                            <input id="bairroEdit" type="text"
                                                 className="form-control" name="bairro"
                                                 required value={bairro} onChange={(e) => setBairro(e.target.value)}/>
                                         </div>
@@ -62,7 +68,7 @@ const EditModal = ({editarCliente, setNome, nome, setEmail, email, setCpf, cpf, 
 
                                 <div className="mb-3">
                                     <label htmlFor="cidade" className="form-label w-100">Cidade</label>
-                                    <input type="text" className="form-control" id="cidadeCreateCliente"  value={cidade} onChange={(e) => setCidade(e.target.value)}  />
+                                    <input type="text" className="form-control" id="cidadeEditCliente"  value={cidade} onChange={(e) => setCidade(e.target.value)}  />
                                 </div>
 
                                 <div className="mb-3">

@@ -17,6 +17,18 @@ const AdminClientes = () => {
     const [cidade, setCidade] = useState('')
     const [senha, setSenha] = useState('')
 
+    const [sucesso, setSucesso] = useState(false)
+    const [falha, setFalha] = useState(false)
+
+    const [nomeVazio, setNomeVazio] = useState(false)
+    const [emailVazio, setEmailVazio] = useState(false)
+    const [cpfVazio, setCpfVazio] = useState(false)
+    const [senhaVazia, setSenhaVazia] = useState(false)
+    const [ruaVazia, setRuaVazia] = useState(false)
+    const [numeroVazio, setNumeroVazio] = useState(false)
+    const [bairroVazio, setBairroVazio] = useState(false)
+    const [cidadeVazia, setCidadeVazia] = useState(false)
+
     const resetEstados = () => {
         setNome('')
         setEmail('')
@@ -26,6 +38,27 @@ const AdminClientes = () => {
         setBairro('')
         setCidade('')
         setSenha('')
+        setNomeVazio(false)
+        setEmailVazio(false)
+        setCpfVazio(false)
+        setSenhaVazia(false)
+        setRuaVazia(false)
+        setNumeroVazio(false)
+        setBairroVazio(false)
+        setCidadeVazia(false)
+    }
+
+    const resetErros = () => {
+        setNomeVazio(false)
+        setEmailVazio(false)
+        setCpfVazio(false)
+        setSenhaVazia(false)
+        setRuaVazia(false)
+        setNumeroVazio(false)
+        setBairroVazio(false)
+        setCidadeVazia(false)
+        setSucesso(false)
+        setFalha(false)
     }
 
     const editarCliente = () => {
@@ -40,12 +73,16 @@ const AdminClientes = () => {
         <div>
             <Header />
 
+            {falha && <div className="fundo-erro mx-auto">Houve um erro na inclusão. Abra o Modal novamente para visualizar o erro.</div>}
+
+            {sucesso && <div className="fundo-sucesso mx-auto">Cliente Cadastrado com sucesso!</div>}
+
             <div className="my-5">
                 <h1 className="text-light">Clientes</h1>
             </div>
             <div className="box">
                 <div className="opcaoSol">
-                    <CreateModal setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf}  setSenha={setSenha} senha={senha} resetEstados={resetEstados} setRua={setRua} rua={rua} setNumero={setNumero} numero={numero} setBairro={setBairro} bairro={bairro} setCidade={setCidade} cidade={cidade}/>
+                    <CreateModal setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf}  setSenha={setSenha} senha={senha} resetEstados={resetEstados} setRua={setRua} rua={rua} setNumero={setNumero} numero={numero} setBairro={setBairro} bairro={bairro} setCidade={setCidade} cidade={cidade} setSucesso={setSucesso} sucesso={sucesso} setFalha={setFalha} falha={falha} setBairroVazio={setBairroVazio} bairroVazio={bairroVazio} setCidadeVazia={setCidadeVazia} cidadeVazia={cidadeVazia} setNumeroVazio={setNumeroVazio} numeroVazio={numeroVazio} setRuaVazia={setRuaVazia} ruaVazia={ruaVazia} setSenhaVazia={setSenhaVazia} senhaVazia={senhaVazia} setCpfVazio={setCpfVazio} cpfVazio={cpfVazio} setEmailVazio={setEmailVazio} emailVazio={emailVazio} setNomeVazio={setNomeVazio} nomeVazio={nomeVazio} resetErros={resetErros}/>
 
                 </div>
                 <div className="textArea">
@@ -68,7 +105,7 @@ const AdminClientes = () => {
                                     </td>
 
                                     <td>
-                                        <EditModal editarCliente={editarCliente} setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf} setRua={setRua} rua={rua} setNumero={setNumero} numero={numero} setBairro={setBairro} bairro={bairro} setCidade={setCidade} cidade={cidade} setSenha={setSenha} senha={senha} resetEstados={resetEstados}   />
+                                        <EditModal editarCliente={editarCliente} setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf} setRua={setRua} rua={rua} setNumero={setNumero} numero={numero} setBairro={setBairro} bairro={bairro} setCidade={setCidade} cidade={cidade} setSenha={setSenha} senha={senha} resetEstados={resetEstados} setSucesso={setSucesso} sucesso={sucesso} setFalha={setFalha} falha={falha} setBairroVazio={setBairroVazio} bairroVazio={bairroVazio} setCidadeVazia={setCidadeVazia} cidadeVazia={cidadeVazia} setNumeroVazio={setNumeroVazio} numeroVazio={numeroVazio} setRuaVazia={setRuaVazia} ruaVazia={ruaVazia} setSenhaVazia={setSenhaVazia} senhaVazia={senhaVazia} setCpfVazio={cpfVazio} cpfVazio={cpfVazio} setEmailVazio={setEmailVazio} emailVazio={emailVazio} setNomeVazio={setNomeVazio} nomeVazio={nomeVazio} resetErros={resetErros}/>
                                     </td>
 
                                     <td>

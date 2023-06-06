@@ -93,7 +93,7 @@ const FormPedido = () => {
                         <div className="cabeca-card mt-5 display-5">Faça seu pedido!</div>
 
                         <div className="card-body">
-                            <form method="POST" action="">
+                            <form method="POST" action="" onSubmit={handleSubmit}>
                                 <div className="row mb-1 d-block">
                                     <label htmlFor="calzone"
                                         className="lb-login col-md-4 col-form-label">Escolha uma opção de calzone:</label>
@@ -200,7 +200,7 @@ const FormPedido = () => {
                                 </div>
 
                                 <div className="row mb-5">
-                                    <button onClick={handleSubmit} type="submit" className="m-auto w-50 my-4 d-block p-2 botaoEntrar">
+                                    <button type="submit" className="m-auto w-50 my-4 d-block p-2 botaoEntrar">
                                         Fazer Pedido
                                     </button>
                                 </div>
