@@ -10,8 +10,8 @@ const Login = () => {
         e.preventDefault()
 
         const credenciais = {
-            "email": "ccccccccc@gmail.com",
-            "senha": "cauezera"
+            "email": emailLogin,
+            "senha": senhaLogin
         }
 
         try {
