@@ -1,10 +1,10 @@
-const EditModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, senha, resetEstados, setRua, rua, setNumero, numero, setBairro, bairro, setCidade, cidade, setSucesso, setFalha, nomeVazio, setNomeVazio, emailVazio, setEmailVazio, cpfVazio, setCpfVazio, senhaVazia, setSenhaVazia, numeroVazio, setNumeroVazio, setBairroVazio, bairroVazio, setCidadeVazia, cidadeVazia, setRuaVazia, ruaVazia, resetErros, resetMessagensBanner, recuperarCliente, id, cliente, recuperarClientes }) => {
+const EditModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, senha, resetEstados, setRua, rua, setNumero, numero, setBairro, bairro, setCidade, cidade, setSucesso, setFalha, nomeVazio, setNomeVazio, emailVazio, setEmailVazio, cpfVazio, setCpfVazio, senhaVazia, setSenhaVazia, numeroVazio, setNumeroVazio, setBairroVazio, bairroVazio, setCidadeVazia, cidadeVazia, setRuaVazia, ruaVazia, resetErros, resetMensagensBanner, recuperarCliente, id, cliente, recuperarClientes }) => {
 
     const handleUpdate = async (e) => {
         e.preventDefault()
 
         resetErros()
-        resetMessagensBanner()
+        resetMensagensBanner()
 
         if (!nome.trim())
             setNomeVazio(true)
@@ -29,7 +29,7 @@ const EditModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, senh
         if (!senha.trim() || senha.length < 8)
             setSenhaVazia(true)
 
-        if (!nome || !email || !cpf || !rua || !numero || !bairro || !cidade || !senha) {
+        if (!nome.trim() || nome.length < 3 || !email.trim() || !cpf.length !== 11 || !rua.trim() || !numero || !bairro.trim() || !cidade.trim() || !senha.trim() || senha.length < 8) {
             setFalha(true)
             return
         }
@@ -164,7 +164,7 @@ const EditModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, senh
                                     {senhaVazia && <div className="mt-2 texto-erro">A senha deve possuir 8 caracteres.</div>}
                                 </div>
                                 <div className="modal-footer border-0">
-                                    <button type="button" onClick={resetMessagensBanner} className="btn btn-outline-light" data-bs-dismiss="modal">Voltar</button>
+                                    <button type="button" onClick={resetMensagensBanner} className="btn btn-outline-light" data-bs-dismiss="modal">Voltar</button>
                                     <button type="submit" onClick={handleUpdate} data-bs-dismiss="modal" className="btn btn-warning">Salvar</button>
                                 </div>
                             </form>

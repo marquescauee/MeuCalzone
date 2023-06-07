@@ -14,15 +14,15 @@ const MyRoutes = () => {
     return (
         <BrowserRouter>
             <Routes>
+                {/* rotas públicas */}
                 <Route element={<Home />} path="/"></Route>
                 <Route element={<Home />} path="/home"></Route>
                 <Route element={<Localizacao />} path="/localizacao"></Route>
-
                 <Route element={<LoginCadastro />} path="/loginCadastro"></Route>
 
+                {/* rotas privadas (requerem autenticação) */}
                 <Route element={<Pedido />} path="/pedido"></Route>
                 <Route element={<MeusPedidos />} path="/meusPedidos"></Route>
-
                 <Route element={<Admin />} path="/admin"></Route>
                 <Route element={<AdminClientes />} path="/admin/clientes"></Route>
                 <Route element={<AdminProduto />} path="/admin/produtos"></Route>

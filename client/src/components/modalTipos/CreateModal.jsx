@@ -1,4 +1,52 @@
-const CreateModal = ({ tipo, setTipo, descricao, setDescricao, resetEstado,cadastrarTipo}) => {
+const CreateModal = ({ tipo, setTipo, descricao, setDescricao, resetEstado, setDescricaoVazia, descricaoVazia, setSucesso, setFalha, setTipoVazio, tipoVazio, sucesso, falha, resetErros, resetMensagensBanner, recuperarTipos }) => {
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        resetErros()
+        resetMensagensBanner()
+
+        if (!tipo.trim() || tipo.length !== 3)
+            setTipoVazio(true)
+
+        if (!descricao.trim())
+            setDescricaoVazia(true)
+
+        if (!tipo.trim() || tipo.length !== 3 || !descricao.trim()) {
+            setFalha(true)
+            return
+        }
+
+        const data = {
+            "tipo": tipo,
+            "descricao": descricao
+        }
+
+        try {
+            const response = await fetch('http://localhost:8080/api/tiposProdutos', {
+                method: "POST",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                redirect: "follow",
+                referrerPolicy: "no-referrer",
+                body: JSON.stringify(data),
+            });
+            setSucesso('Tipo de produto cadastrado com sucesso!')
+            setFalha(false)
+            recuperarTipos()
+            resetEstado()
+            return response.json()
+
+        } catch (err) {
+            setFalha(true)
+            setSucesso(false)
+            console.log(err)
+        }
+
+
+    }
     return (
         <>
             <button type="button" className="b1" data-bs-toggle="modal" data-bs-target="#ModalCreateTipo"
@@ -18,17 +66,21 @@ const CreateModal = ({ tipo, setTipo, descricao, setDescricao, resetEstado,cadas
                         <div className="modal-body">
                             <form action="#" method="POST">
                                 <div className="mb-3">
-                                    <label htmlFor="nome" className="form-label w-100">Tipo (1 caractere)</label>
-                                    <input type="text" maxLength={1} className="form-control" id="nomeCreateTipo" aria-describedby="nome" value={tipo} onChange={(e) => setTipo(e.target.value)} />
+                                    <label htmlFor="nome" className="form-label w-100">Tipo (3 caracteres)</label>
+                                    <input type="text" minLength={3} maxLength={3} className="form-control" id="nomeCreateTipo" aria-describedby="nome" value={tipo} onChange={(e) => setTipo(e.target.value)} />
+
+                                    {tipoVazio && <div className="mt-2 texto-erro">Tipo inválido. Por favor, tente novamente.</div>}
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="desc" className="form-label w-100">Descrição</label>
                                     <input type="text" className="form-control" id="descCreateTipo" aria-describedby="descCreateTipo" value={descricao} onChange={(e) => setDescricao(e.target.value)} />
+
+                                    {descricaoVazia && <div className="mt-2 texto-erro">Descrição inválida. Por favor, tente novamente.</div>}
                                 </div>
-                                
+
                                 <div className="modal-footer border-0">
-                                    <button type="button" className="btn btn-outline-light" data-bs-dismiss="modal" onClick={resetEstado}>Voltar</button>
-                                    <button onClick={cadastrarTipo} type="submit" className="btn btn-warning">Salvar</button>
+                                    <button type="button" className="btn btn-outline-light" data-bs-dismiss="modal" onClick={resetMensagensBanner}>Voltar</button>
+                                    <button onClick={handleSubmit} type="submit" className="btn btn-warning" data-bs-dismiss="modal">Salvar</button>
                                 </div>
                             </form>
                         </div>

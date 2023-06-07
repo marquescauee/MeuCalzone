@@ -1,14 +1,14 @@
 import './modalCliente.css'
 
-const CreateModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, senha, resetEstados, setRua, rua, setNumero, numero, setBairro, bairro, setCidade, cidade, setSucesso, setFalha, nomeVazio, setNomeVazio, emailVazio, setEmailVazio, cpfVazio, setCpfVazio, senhaVazia, setSenhaVazia, numeroVazio, setNumeroVazio, setBairroVazio, bairroVazio, setCidadeVazia, cidadeVazia, setRuaVazia, ruaVazia, resetErros, resetMessagensBanner, recuperarClientes}) => {
+const CreateModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, senha, resetEstados, setRua, rua, setNumero, numero, setBairro, bairro, setCidade, cidade, setSucesso, setFalha, nomeVazio, setNomeVazio, emailVazio, setEmailVazio, cpfVazio, setCpfVazio, senhaVazia, setSenhaVazia, numeroVazio, setNumeroVazio, setBairroVazio, bairroVazio, setCidadeVazia, cidadeVazia, setRuaVazia, ruaVazia, resetErros, resetMensagensBanner, recuperarClientes}) => {
 
     const handleSubmit = async (e) => {
 
         e.preventDefault()
         resetErros()
-        resetMessagensBanner()
+        resetMensagensBanner()
 
-        if (!nome.trim())
+        if (!nome.trim() || nome.length < 3)
             setNomeVazio(true)
 
         if (!email.trim())
@@ -28,10 +28,12 @@ const CreateModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, se
         if (!cidade.trim())
             setCidadeVazia(true)
 
-        if (!senha.trim() || senha.length < 8)
-            setSenhaVazia(true)
+        if (!senha.trim() || senha.length < 8) {
 
-        if (!nome || !email || !cpf || !rua || !numero || !bairro || !cidade || !senha) {
+            setSenhaVazia(true)
+        }
+
+        if (!nome.trim() || nome.length < 3 || !email.trim() || !cpf.length !== 11 || !rua.trim() || !numero || !bairro.trim() || !cidade.trim() || !senha.trim() || senha.length < 8) {
             setFalha(true)
             return
         }
@@ -162,7 +164,7 @@ const CreateModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, se
                                     {senhaVazia && <div className="mt-2 texto-erro">A senha deve possuir 8 caracteres.</div>}
                                 </div>
                                 <div className="modal-footer border-0">
-                                    <button type="button" className="btn btn-outline-light" data-bs-dismiss="modal" onClick={resetMessagensBanner}>Voltar</button>
+                                    <button type="button" className="btn btn-outline-light" data-bs-dismiss="modal" onClick={resetMensagensBanner}>Voltar</button>
                                     <button className="btn btn-warning" id="botaoSalvarCliente" data-bs-dismiss="modal" onClick={handleSubmit}>Salvar</button>
                                 </div>
                             </form>
