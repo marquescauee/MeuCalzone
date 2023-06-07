@@ -3,9 +3,11 @@ package cg.br.meucalzone.controller;
 import java.util.List;
 import java.util.Optional;
 
+import cg.br.meucalzone.models.Credencial;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,8 +48,15 @@ public class PessoaController {
 
 			Endereco endereco = new Endereco(enderecoRequest.getRua(), enderecoRequest.getNumero(), enderecoRequest.getBairro(), enderecoRequest.getCidade());
 
+			BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+
+			String senhaHash = bcrypt.encode(pessoa.getSenha());
+
 			enderecoRepository.save(endereco);
+
 			pessoa.setEndereco(endereco);
+			pessoa.setSenha(senhaHash);
+
 			pessoaRepository.save(pessoa);
 			return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
 		} catch (Exception e) {
@@ -79,10 +88,13 @@ public class PessoaController {
 
 		Optional<Endereco> enderecoBanco = enderecoRepository.findById(pessoa.getEndereco().getIdEndereco());
 
+		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+		String senhaHash = bcrypt.encode(pessoaRequest.getSenha());
+
 		pessoa.setCpf(pessoaRequest.getCpf());
 		pessoa.setEmail(pessoaRequest.getEmail());
 		pessoa.setNome(pessoaRequest.getNome());
-		pessoa.setSenha(pessoaRequest.getSenha());
+		pessoa.setSenha(senhaHash);
 		pessoa.setTipo(pessoaRequest.getTipo());
 
 		if (enderecoBanco.isPresent()) {
@@ -108,5 +120,20 @@ public class PessoaController {
 		pessoaRepository.delete(pessoaOptional.get());
 
 		return ResponseEntity.status(HttpStatus.OK).body("\"Pessoa removida com sucesso!\"");
+	}
+
+	@PostMapping("/autenticar")
+	public Boolean autenticar(@RequestBody Credencial credencial) {
+		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+
+		Optional<Pessoa> pessoaBanco = pessoaRepository.findByEmail(credencial.getEmail());
+
+		if(pessoaBanco.isPresent()) {
+			Pessoa p = pessoaBanco.get();
+
+			return bcrypt.matches(credencial.getSenha(), p.getSenha());
+		}
+
+		return false;
 	}
 }

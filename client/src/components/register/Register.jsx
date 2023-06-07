@@ -42,7 +42,7 @@ const Register = () => {
                                     <div className="col-md-10 d-block m-auto">
                                         <input id="email" type="email"
                                             className="form-control" name="email"
-                                            required autocomplete="email" autofocus value={emailCadastro} onChange={e => setEmailCadastro(e.target.value)}/>
+                                            required  value={emailCadastro} onChange={e => setEmailCadastro(e.target.value)}/>
                                     </div>
                                 </div>
                                 <div className="row mb-2 d-block">
@@ -110,7 +110,7 @@ const Register = () => {
                                     <div className="col-md-10 d-block m-auto">
                                         <input id="password" type="password"
                                             className="form-control" name="password"
-                                            required autocomplete="current-password" value={senhaCadastro} onChange={e => setSenhaCadastro(e.target.value)}/>
+                                            required value={senhaCadastro} onChange={e => setSenhaCadastro(e.target.value)}/>
                                     </div>
                                 </div>
 

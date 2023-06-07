@@ -6,9 +6,33 @@ const Login = () => {
     const [emailLogin, setEmailLogin] = useState('')
     const [senhaLogin, setSenhaLogin] = useState('')
 
-   const handleLogin = () => {
-    //TODO
-   }
+    const handleLogin = async (e) => {
+        e.preventDefault()
+
+        const credenciais = {
+            "email": "ccccccccc@gmail.com",
+            "senha": "cauezera"
+        }
+
+        try {
+            const response = await fetch(`http://localhost:8080/api/pessoas/autenticar`, {
+                method: "POST",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                redirect: "follow",
+                referrerPolicy: "no-referrer",
+                body: JSON.stringify(credenciais)
+            });
+
+            const data = await response.json()
+            console.log(data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     return (
         <div className='divLogin d-flex'>
@@ -20,24 +44,24 @@ const Login = () => {
                         <div className="card-body">
                             <form method="POST" action="{{ route('login') }}">
                                 <div className="row mb-5 d-block">
-                                    <label for="email"
+                                    <label htmlFor="email"
                                         className="lb-login col-md-4 col-form-label">Email:</label>
 
                                     <div className="col-md-10 d-block m-auto">
-                                        <input id="email" type="email"
+                                        <input id="emailLogin" type="email"
                                             className="form-control" name="email"
-                                            required autocomplete="email" autofocus value={emailLogin} onChange={e => setEmailLogin(e.target.value)}/>
+                                            required  value={emailLogin} onChange={e => setEmailLogin(e.target.value)} />
                                     </div>
                                 </div>
 
                                 <div className="row mb-5 d-block">
-                                    <label for="password"
+                                    <label htmlFor="password"
                                         className="lb-login col-md-4 col-form-label">Senha:</label>
 
                                     <div className="col-md-10 d-block m-auto">
-                                        <input id="password" type="password"
+                                        <input id="passwordLogin" type="password"
                                             className="form-control" name="password"
-                                            required autocomplete="current-password" value={senhaLogin} onChange={e => setSenhaLogin(e.target.value)}/>                              
+                                            required  value={senhaLogin} onChange={e => setSenhaLogin(e.target.value)} />
                                     </div>
                                 </div>
 
