@@ -12,7 +12,7 @@ public class TipoProduto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idTipoProduto;
 
-    @Size(max = 1)
+    @Size(max = 3)
     private String tipo;
 
     @NotBlank

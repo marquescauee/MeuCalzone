@@ -1,4 +1,4 @@
-const DeleteModal = ({descricao, resetEstado, setSucesso, setFalha, id, recuperarTipos}) => {
+const DeleteModal = ({descricao, resetEstado, setSucesso, setFalha, id, recuperarTipos, resetMensagensBanner}) => {
 
     const handleDelete = async (e) => {
         e.preventDefault()
@@ -49,7 +49,7 @@ const DeleteModal = ({descricao, resetEstado, setSucesso, setFalha, id, recupera
                                     <h5>Tem certeza que deseja remover {descricao}</h5>
                                 </div>
                                 <div className="modal-footer border-0">
-                                    <button type="button" className="btn btn-outline-light" data-bs-dismiss="modal">Voltar</button>
+                                    <button type="button" className="btn btn-outline-light" data-bs-dismiss="modal"onClick={resetMensagensBanner}>Voltar</button>
                                     <button type="submit" className="btn btn-outline-danger" data-bs-dismiss="modal" onClick={handleDelete}>Remover</button>
                                 </div>
                             </form>

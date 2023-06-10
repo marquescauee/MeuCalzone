@@ -58,7 +58,6 @@ const AdminTipos = () => {
                     return -1
                 return 0
             })
-            console.log(data)
             setTipos(data)
             return data
 
@@ -107,7 +106,7 @@ const AdminTipos = () => {
             </div>
             <div className="box">
                 <div className="opcaoSol">
-                    <CreateModal tipo={tipo} setTipo={setTipo} descricao={descricao} setDescricao={setDescricao} resetEstado={resetEstado} setDescricaoVazia={setDescricaoVazia} descricaoVazia={descricaoVazia} setSucesso={setSucesso} sucesso={sucesso} setFalha={setFalha} falha={falha} setTipoVazio={setTipoVazio} tipoVazio={tipoVazio} resetErros={resetErros} resetMensagensBanner={resetMensagensBanner} recuperarTipos={recuperarTipos} />
+                    <CreateModal tipo={tipo} setTipo={setTipo} descricao={descricao} setDescricao={setDescricao} resetEstado={resetEstado} setDescricaoVazia={setDescricaoVazia} descricaoVazia={descricaoVazia} setSucesso={setSucesso} setFalha={setFalha} setTipoVazio={setTipoVazio} tipoVazio={tipoVazio} resetErros={resetErros} resetMensagensBanner={resetMensagensBanner} recuperarTipos={recuperarTipos} />
                 </div>
                 <div className="textArea">
                     <div className="table">
@@ -131,7 +130,7 @@ const AdminTipos = () => {
                                             </td>
 
                                             <td>
-                                                <DeleteModal resetEstado={resetEstado} descricao={t.descricao} setSucesso={setSucesso} setFalha={setFalha} id={t.idTipoProduto} recuperarTipos={recuperarTipos} />
+                                                <DeleteModal resetEstado={resetEstado} descricao={t.descricao} setSucesso={setSucesso} setFalha={setFalha} id={t.idTipoProduto} recuperarTipos={recuperarTipos} resetMensagensBanner={resetMensagensBanner}/>
                                             </td>
                                         </tr>
                                     })

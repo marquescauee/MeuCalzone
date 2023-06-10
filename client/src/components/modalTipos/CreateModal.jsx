@@ -1,4 +1,4 @@
-const CreateModal = ({ tipo, setTipo, descricao, setDescricao, resetEstado, setDescricaoVazia, descricaoVazia, setSucesso, setFalha, setTipoVazio, tipoVazio, sucesso, falha, resetErros, resetMensagensBanner, recuperarTipos }) => {
+const CreateModal = ({ tipo, setTipo, descricao, setDescricao, resetEstado, setDescricaoVazia, descricaoVazia, setSucesso, setFalha, setTipoVazio, tipoVazio, resetErros, resetMensagensBanner, recuperarTipos }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -20,7 +20,7 @@ const CreateModal = ({ tipo, setTipo, descricao, setDescricao, resetEstado, setD
             "tipo": tipo,
             "descricao": descricao
         }
-
+        
         try {
             const response = await fetch('http://localhost:8080/api/tiposProdutos', {
                 method: "POST",

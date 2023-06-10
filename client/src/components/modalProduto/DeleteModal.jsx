@@ -1,4 +1,31 @@
-const DeleteModal = ({descricao, deletarProduto}) => {
+const DeleteModal = ({resetEstado, descricao, setSucesso, setFalha, id, recuperarProdutos, resetMensagensBanner }) => {
+
+    const handleDelete = async(e) => {
+        e.preventDefault()
+
+        try {
+            const response = await fetch(`http://localhost:8080/api/produtos/${id}`, {
+                method: "DELETE",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                redirect: "follow",
+                referrerPolicy: "no-referrer",
+            });
+            setSucesso('Produto removido com sucesso!')
+            setFalha(false)
+            recuperarProdutos()
+            resetEstado()
+            return response.json()
+
+        } catch (err) {
+            setFalha(true)
+            setSucesso(false)
+            console.log(err)
+        }
+    }
 
     return (
         <>
@@ -22,8 +49,8 @@ const DeleteModal = ({descricao, deletarProduto}) => {
                                     <h5>Tem certeza que deseja remover {descricao}</h5>
                                 </div>
                                 <div className="modal-footer border-0">
-                                    <button type="button" className="btn btn-outline-light" data-bs-dismiss="modal">Voltar</button>
-                                    <button onClick={deletarProduto} type="submit" className="btn btn-outline-danger">Remover</button>
+                                    <button type="button" className="btn btn-outline-light" data-bs-dismiss="modal" onClick={resetMensagensBanner}>Voltar</button>
+                                    <button onClick={handleDelete} type="submit" className="btn btn-outline-danger" data-bs-dismiss="modal">Remover</button>
                                 </div>
                             </form>
                         </div>
