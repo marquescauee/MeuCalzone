@@ -6,33 +6,22 @@ const Login = () => {
     const [emailLogin, setEmailLogin] = useState('')
     const [senhaLogin, setSenhaLogin] = useState('')
 
-    const handleLogin = async (e) => {
-        e.preventDefault()
+    const [credenciaisErradas, setCredenciaisErradas] = useState(false)
 
-        const credenciais = {
-            "email": emailLogin,
-            "senha": senhaLogin
-        }
+    // const handleLogin = async (e) => {
+    //     e.preventDefault()
 
-        try {
-            const response = await fetch(`http://localhost:8080/api/pessoas/autenticar`, {
-                method: "POST",
-                mode: "cors",
-                cache: "no-cache",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                redirect: "follow",
-                referrerPolicy: "no-referrer",
-                body: JSON.stringify(credenciais)
-            });
+    //     let resultLogin = await autCtx.autenticar(emailLogin, senhaLogin)
 
-            const data = await response.json()
-            console.log(data)
-        } catch (err) {
-            console.log(err)
-        }
-    }
+    //     console.log(resultLogin)
+
+    //     if(!resultLogin) {
+    //         setCredenciaisErradas(true)
+    //         return
+    //     }
+
+    //     navigate("/home")
+    // }
 
     return (
         <div className='divLogin d-flex'>
@@ -65,8 +54,10 @@ const Login = () => {
                                     </div>
                                 </div>
 
+                                {credenciaisErradas && <div className="mt-2 texto-erro">Login e/ou senha inválidos.</div>}
+
                                 <div className="row mb-5">
-                                    <button onClick={handleLogin} type="submit" className="m-auto w-50 my-4 d-block p-2 botaoEntrar">
+                                    <button type="submit" className="m-auto w-50 my-4 d-block p-2 botaoEntrar">
                                         Entrar
                                     </button>
                                 </div>

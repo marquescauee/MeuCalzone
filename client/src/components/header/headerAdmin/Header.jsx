@@ -25,14 +25,17 @@ const Header = () => {
                         </li>
                     </ul>
 
-                    <div className="dropdown">
-                        <button className="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Olá, Fulano!
-                        </button>
-                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <Link to={"/logout"} className="dropdown-item">Sair</Link>
+                        <div className="dropdown">
+                            <button className="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Olá, Fulano!
+                            </button>
+
+                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <Link to={"/admin"} className="dropdown-item">Painel do Admin</Link>
+                                <Link to={"/"}  className="dropdown-item">Sair</Link>
+                            </div>
                         </div>
-                    </div>
+                    
                 </nav>
             </header>
         </div>

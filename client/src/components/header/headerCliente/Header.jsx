@@ -24,6 +24,19 @@ const Header = () => {
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link text-light bg-warning text-dark noHover" to={"/loginCadastro"}>Login/Cadastro</Link>
+
+                            {/* {
+                                autCtx.user.nome &&
+                                 <div className="dropdown">
+                                    <button className="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Olá, {autCtx.user.nome}!
+                                    </button>
+                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <Link to={"/"} onClick={sair} className="dropdown-item">Sair</Link>
+                                    </div>
+                                </div>
+                            } */}
+
                         </li>
                     </ul>
                 </nav>

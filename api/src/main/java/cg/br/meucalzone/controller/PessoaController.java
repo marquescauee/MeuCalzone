@@ -123,7 +123,7 @@ public class PessoaController {
 	}
 
 	@PostMapping("/autenticar")
-	public Boolean autenticar(@RequestBody Credencial credencial) {
+	public ResponseEntity<Pessoa> autenticar(@RequestBody Credencial credencial) {
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
 
 		Optional<Pessoa> pessoaBanco = pessoaRepository.findByEmail(credencial.getEmail());
@@ -131,9 +131,14 @@ public class PessoaController {
 		if(pessoaBanco.isPresent()) {
 			Pessoa p = pessoaBanco.get();
 
-			return bcrypt.matches(credencial.getSenha(), p.getSenha());
+			boolean result = bcrypt.matches(credencial.getSenha(), p.getSenha());
+
+			if(!result)
+				return ResponseEntity.status(HttpStatus.OK).body(null);
+
+			return ResponseEntity.status(HttpStatus.OK).body(p);
 		}
 
-		return false;
+		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
 }

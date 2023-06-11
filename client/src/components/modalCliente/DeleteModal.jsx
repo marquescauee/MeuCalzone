@@ -1,4 +1,4 @@
-const DeleteModal = ({nome, id, setSucesso, setFalha, recuperarClientes, resetEstados}) => {
+const DeleteModal = ({setSucesso, setFalha, resetEstados, nome, id, recuperarClientes}) => {
 
     const handleDelete = async (e) => {
         e.preventDefault()

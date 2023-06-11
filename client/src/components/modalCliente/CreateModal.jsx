@@ -33,7 +33,7 @@ const CreateModal = ({ setNome, nome, setEmail, email, setCpf, cpf, setSenha, se
             setSenhaVazia(true)
         }
 
-        if (!nome.trim() || nome.length < 3 || !email.trim() || !cpf.length !== 11 || !rua.trim() || !numero || !bairro.trim() || !cidade.trim() || !senha.trim() || senha.length < 8) {
+        if (!nome.trim() || nome.length < 3 || !email.trim() || cpf.length !== 11 || !rua.trim() || !numero || !bairro.trim() || !cidade.trim() || !senha.trim() || senha.length < 8) {
             setFalha(true)
             return
         }

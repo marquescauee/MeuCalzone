@@ -1,7 +1,10 @@
 package cg.br.meucalzone.models;
 
+import jakarta.persistence.Column;
+
 public class Credencial {
 
+    @Column(unique = true)
     private String email;
     private String senha;
 
