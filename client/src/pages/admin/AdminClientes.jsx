@@ -1,12 +1,13 @@
 import Header from "../../components/header/headerAdmin/Header"
 import Footer from "../../components/footer/Footer"
 import CreateModal from "../../components/modalCliente/CreateModal"
-import EditModal from "../../components/modalCliente/EditModal"
-import DeleteModal from "../../components/modalCliente/DeleteModal"
 import '../../General.css'
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const AdminClientes = () => {
+
+    const navigate = useNavigate()
 
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
@@ -46,9 +47,9 @@ const AdminClientes = () => {
 
             const data = await response.json()
             data.sort((a, b) => {
-                if(a.nome > b.nome)
+                if (a.nome > b.nome)
                     return 1
-                if(a.nome < b.nome)
+                if (a.nome < b.nome)
                     return -1
                 return 0
             })
@@ -60,11 +61,12 @@ const AdminClientes = () => {
         }
     }
 
-    const recuperarCliente = async (id) => {
+    const handleDelete = async (e, id) => {
+        e.preventDefault()
 
         try {
             const response = await fetch(`http://localhost:8080/api/pessoas/${id}`, {
-                method: "GET",
+                method: "DELETE",
                 mode: "cors",
                 cache: "no-cache",
                 headers: {
@@ -73,20 +75,15 @@ const AdminClientes = () => {
                 redirect: "follow",
                 referrerPolicy: "no-referrer",
             });
-
-            const data = await response.json()
-            
-            setNome(data.nome)
-            setEmail(data.email)
-            setCpf(data.cpf)
-            setRua(data.endereco.rua)
-            setNumero(data.endereco.numero)
-            setBairro(data.endereco.bairro)
-            setCidade(data.endereco.cidade)
-            setSenha(data.senha)
-            return data
+            setSucesso('Cliente removido com sucesso!')
+            setFalha(false)
+            recuperarClientes()
+            resetEstados()
+            return response.json()
 
         } catch (err) {
+            setFalha(true)
+            setSucesso(false)
             console.log(err)
         }
     }
@@ -166,11 +163,19 @@ const AdminClientes = () => {
                                             <td>{cli.nome}</td>
                                             <td>{cli.cpf}</td>
                                             <td>
-                                                <EditModal setNome={setNome} nome={nome} setEmail={setEmail} email={email} setCpf={setCpf} cpf={cpf} setRua={setRua} rua={rua} setNumero={setNumero} numero={numero} setBairro={setBairro} bairro={bairro} setCidade={setCidade} cidade={cidade} setSenha={setSenha} senha={senha} resetEstados={resetEstados} setSucesso={setSucesso} sucesso={sucesso} setFalha={setFalha} falha={falha} setBairroVazio={setBairroVazio} bairroVazio={bairroVazio} setCidadeVazia={setCidadeVazia} cidadeVazia={cidadeVazia} setNumeroVazio={setNumeroVazio} numeroVazio={numeroVazio} setRuaVazia={setRuaVazia} ruaVazia={ruaVazia} setSenhaVazia={setSenhaVazia} senhaVazia={senhaVazia} setCpfVazio={setCpfVazio} cpfVazio={cpfVazio} setEmailVazio={setEmailVazio} emailVazio={emailVazio} setNomeVazio={setNomeVazio} nomeVazio={nomeVazio} resetErros={resetErros} resetMensagensBanner={resetMensagensBanner} recuperarCliente={recuperarCliente} id={cli.id} recuperarClientes={recuperarClientes} />
+                                                <button onClick={() => navigate(`/clientes/edit/${cli.id}`)} className="link-tabela botaoEditar">
+                                                    <div>
+                                                        <h2 className="d-flex justify-content-center botaoEditar">Editar</h2>
+                                                    </div>
+                                                </button>
                                             </td>
 
                                             <td>
-                                                <DeleteModal setSucesso={setSucesso} setFalha={setFalha} resetEstados={resetEstados} nome={cli.nome} id={cli.id} recuperarClientes={recuperarClientes} recuperarCliente={recuperarCliente}/>
+                                                <button type="button" className="link-tabela botaoRemover" onClick={(e) => handleDelete(e, cli.id)}>
+                                                    <div>
+                                                        <h2 className="d-flex justify-content-center botaoRemover">Remover</h2>
+                                                    </div>
+                                                </button>
                                             </td>
                                         </tr>
                                     })

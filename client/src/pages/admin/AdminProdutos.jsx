@@ -1,11 +1,12 @@
 import Header from "../../components/header/headerAdmin/Header"
 import Footer from "../../components/footer/Footer"
 import CreateModal from "../../components/modalProduto/CreateModal"
-import EditModal from "../../components/modalProduto/EditModal"
-import DeleteModal from "../../components/modalProduto/DeleteModal"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const AdminProduto = () => {
+
+    const navigate = useNavigate()
 
     const [descricao, setDescricao] = useState('')
     const [qtd, setQtd] = useState(0)
@@ -77,29 +78,6 @@ const AdminProduto = () => {
         }
     }
 
-    const recuperarProduto = async (id) => {
-        try {
-            const response = await fetch(`http://localhost:8080/api/produtos/${id}`, {
-                method: "GET",
-                mode: "cors",
-                cache: "no-cache",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                redirect: "follow",
-                referrerPolicy: "no-referrer",
-            });
-
-            const data = await response.json()
-            setDescricao(data.descricao)
-            setQtd(data.qtd)
-            return data
-
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
     const recuperarTipos = async () => {
         try {
             const response = await fetch('http://localhost:8080/api/tiposProdutos', {
@@ -125,6 +103,33 @@ const AdminProduto = () => {
             return data
 
         } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const handleDelete = async (e, id) => {
+        e.preventDefault()
+
+        try {
+            const response = await fetch(`http://localhost:8080/api/produtos/${id}`, {
+                method: "DELETE",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                redirect: "follow",
+                referrerPolicy: "no-referrer",
+            });
+            setSucesso('Produto removido com sucesso!')
+            setFalha(false)
+            recuperarProdutos()
+            resetEstado()
+            return response.json()
+
+        } catch (err) {
+            setFalha(true)
+            setSucesso(false)
             console.log(err)
         }
     }
@@ -167,10 +172,18 @@ const AdminProduto = () => {
                                             <td>{prod.qtd}</td>
 
                                             <td>
-                                                <EditModal descricao={descricao} setDescricao={setDescricao} qtd={qtd} setQtd={setQtd} idTipo={idTipo} setIdTipo={setIdTipo} descricaoVazia={descricaoVazia} setDescricaoVazia={setDescricaoVazia} qtdVazia={qtdVazia} setQtdVazia={setQtdVazia} idTipoVazio={idTipoVazio} setIdTipoVazio={setIdTipoVazio} setSucesso={setSucesso} setFalha={setFalha} tipos={tipos} resetEstado={resetEstado} resetMensagensBanner={resetMensagensBanner} resetErros={resetErros} recuperarProdutos={recuperarProdutos} recuperarProduto={recuperarProduto} setTipoTipo={setTipoTipo} tipoTipo={tipoTipo} setDescricaoTipo={setDescricaoTipo} descricaoTipo={descricaoTipo} id={prod.idProduto}/>
+                                                <button onClick={() => navigate(`/produtos/edit/${prod.idProduto}`)} className="link-tabela botaoEditar">
+                                                    <div>
+                                                        <h2 className="d-flex justify-content-center botaoEditar">Editar</h2>
+                                                    </div>
+                                                </button>
                                             </td>
                                             <td>
-                                                <DeleteModal resetEstado={resetEstado} descricao={prod.descricao} setSucesso={setSucesso} setFalha={setFalha} id={prod.idProduto} recuperarTipos={recuperarTipos} resetMensagensBanner={resetMensagensBanner} recuperarProdutos={recuperarProdutos}/>
+                                                <button type="button" className="link-tabela botaoRemover" onClick={(e) => handleDelete(e, prod.idProduto)}>
+                                                    <div>
+                                                        <h2 className="d-flex justify-content-center botaoRemover">Remover</h2>
+                                                    </div>
+                                                </button>
                                             </td>
                                         </tr>
                                     })

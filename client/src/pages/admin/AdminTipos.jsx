@@ -1,11 +1,12 @@
 import Footer from "../../components/footer/Footer"
 import Header from "../../components/header/headerAdmin/Header"
 import CreateModal from "../../components/modalTipos/CreateModal"
-import EditModal from "../../components/modalTipos/EditModal"
-import DeleteModal from "../../components/modalTipos/DeleteModal"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const AdminTipos = () => {
+
+    const navigate = useNavigate()
 
     const [tipo, setTipo] = useState('')
     const [descricao, setDescricao] = useState('')
@@ -52,9 +53,9 @@ const AdminTipos = () => {
 
             const data = await response.json()
             data.sort((a, b) => {
-                if (a.nome > b.nome)
+                if (a.descricao > b.descricao)
                     return 1
-                if (a.nome < b.nome)
+                if (a.descricao < b.descricao)
                     return -1
                 return 0
             })
@@ -66,10 +67,12 @@ const AdminTipos = () => {
         }
     }
 
-    const recuperarTipo = async (id) => {
+    const handleDelete = async (e, id) => {
+        e.preventDefault()
+
         try {
             const response = await fetch(`http://localhost:8080/api/tiposProdutos/${id}`, {
-                method: "GET",
+                method: "DELETE",
                 mode: "cors",
                 cache: "no-cache",
                 headers: {
@@ -78,13 +81,15 @@ const AdminTipos = () => {
                 redirect: "follow",
                 referrerPolicy: "no-referrer",
             });
-
-            const data = await response.json()
-            setTipo(data.tipo)
-            setDescricao(data.descricao)
-            return data
+            setSucesso('Tipo de produto removido com sucesso!')
+            setFalha(false)
+            recuperarTipos()
+            resetEstado()
+            return response.json()
 
         } catch (err) {
+            setFalha(true)
+            setSucesso(false)
             console.log(err)
         }
     }
@@ -121,18 +126,28 @@ const AdminTipos = () => {
                             <tbody>
                                 {
                                     tipos.map(t => {
-                                        return <tr key={t.idTipoProduto}>
-                                            <td>{t.tipo}</td>
-                                            <td>{t.descricao}</td>
+                                        return (
+                                            <tr key={t.idTipoProduto}>
+                                                <td>{t.tipo}</td>
+                                                <td>{t.descricao}</td>
 
-                                            <td>
-                                                <EditModal tipo={tipo} setTipo={setTipo} descricao={descricao} setDescricao={setDescricao} resetEstado={resetEstado} setDescricaoVazia={setDescricaoVazia} descricaoVazia={descricaoVazia} setSucesso={setSucesso} sucesso={sucesso} setFalha={setFalha} falha={falha} setTipoVazio={setTipoVazio} tipoVazio={tipoVazio} recuperarTipos={recuperarTipos} id={t.idTipoProduto} recuperarTipo={recuperarTipo} resetErros={resetErros} resetMensagensBanner={resetMensagensBanner} />
-                                            </td>
+                                                <td>
+                                                    <button type="button" onClick={() => navigate(`/tipos/edit/${t.idTipoProduto}`)} className="link-tabela botaoEditar">
+                                                        <div>
+                                                            <h2 className="d-flex justify-content-center botaoEditar">Editar</h2>
+                                                        </div>
+                                                    </button>
+                                                </td>
 
-                                            <td>
-                                                <DeleteModal resetEstado={resetEstado} descricao={t.descricao} setSucesso={setSucesso} setFalha={setFalha} id={t.idTipoProduto} recuperarTipos={recuperarTipos} resetMensagensBanner={resetMensagensBanner}/>
-                                            </td>
-                                        </tr>
+                                                <td>
+                                                    <button type="button" onClick={(e) => handleDelete(e, t.idTipoProduto)} className="link-tabela botaoRemover">
+                                                        <div>
+                                                            <h2 className="d-flex justify-content-center botaoRemover">Remover</h2>
+                                                        </div>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        )
                                     })
                                 }
                             </tbody>

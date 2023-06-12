@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import './formPedido.css'
 import { useState } from 'react'
+import { useEffect } from 'react'
 
 const FormPedido = () => {
 
@@ -69,7 +70,7 @@ const FormPedido = () => {
     }
 
     const removeCalzone = (calzone) => {
-        console.log(calzones)
+        console.log(calzone)
         let newCalzonesArray = calzones.filter(c => c.id !== calzone.id)
         setCalzones(newCalzonesArray)
 
@@ -85,6 +86,39 @@ const FormPedido = () => {
         setBebidas(newBebidasArray)
     }
 
+    const recuperarCalzones = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/api/produtos', {
+                method: "GET",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                redirect: "follow",
+                referrerPolicy: "no-referrer",
+            });
+
+            const data = await response.json()
+            data.sort((a, b) => {
+                if(a.nome > b.nome)
+                    return 1
+                if(a.nome < b.nome)
+                    return -1
+                return 0
+            })
+            setCalzones(data)
+            return data
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        recuperarCalzones()
+    })
+
     return (
         <div className='mb-5'>
             <div className="row justify-content-center d-flex">
@@ -99,9 +133,7 @@ const FormPedido = () => {
                                         className="lb-login col-md-4 col-form-label">Escolha uma opção de calzone:</label>
                                     <div className="col-md-10 d-block m-auto">
                                         <select className="form-select" name="calzone" id="calzone" onChange={e => setCalzone(e.target.value)}>
-                                            <option value="Calabresa">Calabresa</option>
-                                            <option value="Queijo">Queijo</option>
-                                            <option value="Frango">Frango</option>
+                                           
                                         </select>
                                     </div>
                                 </div>
