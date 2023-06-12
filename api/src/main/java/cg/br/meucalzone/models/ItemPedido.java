@@ -9,10 +9,13 @@ import jakarta.validation.constraints.NotNull;
 public class ItemPedido {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idItemPedido;
+
     @ManyToOne
     @JoinColumn(name = "idPedido", nullable = false)
     private Pedido pedido;
-    @Id
+
     @ManyToOne
     @JoinColumn(name = "idProduto", nullable = false)
     private Produto produto;
@@ -48,5 +51,21 @@ public class ItemPedido {
 
     public void setQtdProduto(int qtdProduto) {
         this.qtdItensPedido = qtdProduto;
+    }
+
+    public int getIdItemPedido() {
+        return idItemPedido;
+    }
+
+    public void setIdItemPedido(int idItemPedido) {
+        this.idItemPedido = idItemPedido;
+    }
+
+    public int getQtdItensPedido() {
+        return qtdItensPedido;
+    }
+
+    public void setQtdItensPedido(int qtdItensPedido) {
+        this.qtdItensPedido = qtdItensPedido;
     }
 }

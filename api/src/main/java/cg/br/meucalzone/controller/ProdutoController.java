@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,5 +88,50 @@ public class ProdutoController {
         produtoRepository.delete(produtoOptional.get());
 
         return ResponseEntity.status(HttpStatus.OK).body("\"Produto removido com sucesso\"");
+    }
+
+    @GetMapping("/calzones")
+    public ResponseEntity<List<Produto>> recuperarCalzones() {
+        List<Produto> produtos = produtoRepository.findAll();
+
+        List<Produto> result = new ArrayList<>();
+
+        for(Produto p : produtos) {
+            if(p.getTipo().getTipo().equals("cal")) {
+                result.add(p);
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @GetMapping("/bebidas")
+    public ResponseEntity<List<Produto>> recuperarBebidas() {
+        List<Produto> produtos = produtoRepository.findAll();
+
+        List<Produto> result = new ArrayList<>();
+
+        for(Produto p : produtos) {
+            if(p.getTipo().getTipo().equals("beb")) {
+                result.add(p);
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @GetMapping("/batatas")
+    public ResponseEntity<List<Produto>> recuperarBatatas() {
+        List<Produto> produtos = produtoRepository.findAll();
+
+        List<Produto> result = new ArrayList<>();
+
+        for(Produto p : produtos) {
+            if(p.getTipo().getTipo().equals("bat")) {
+                result.add(p);
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }

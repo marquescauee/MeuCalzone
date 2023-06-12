@@ -12,3 +12,7 @@ table {
     font-size: 20px; 
     margin-top: -60px;
 }
+
+.space-td {
+    word-spacing: 25px;
+}

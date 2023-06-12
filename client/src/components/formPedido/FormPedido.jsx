@@ -1,94 +1,163 @@
-import { useNavigate } from 'react-router-dom'
 import './formPedido.css'
 import { useState } from 'react'
 import { useEffect } from 'react'
 
-const FormPedido = () => {
+const FormPedido = ({setSucesso}) => {
 
-    const navigate = useNavigate()
+    const [cont, setCont] = useState(0)
 
-    const handleSubmit = () => {
-        //TODO
-        navigate("/meusPedidos")
+    const [calzones, setCalzones] = useState([])
+    const [bebidas, setBebidas] = useState([])
+    const [batatas, setBatatas] = useState([])
+    const [entrega, setEntrega] = useState('')
+
+    const [idCalzoneAtual, setIdCalzoneAtual] = useState(0)
+    const [calzoneAtual, setCalzoneAtual] = useState('')
+    const [quantidadeCalzone, setQuantidadeCalzone] = useState(1)
+
+    const [calzonesPedido, setCalzonesPedido] = useState([])
+
+    const [idBebidaAtual, setIdBebidaAtual] = useState(0)
+    const [bebidaAtual, setBebidaAtual] = useState('')
+    const [quantidadeBebida, setQuantidadeBebida] = useState(1)
+
+    const [bebidasPedido, setBebidasPedido] = useState([])
+
+    const [idBatataAtual, setIdBatataAtual] = useState(0)
+    const [batataAtual, setBatataAtual] = useState('')
+    const [quantidadeBatata, setQuantidadeBatata] = useState(1)
+
+    const [batatasPedido, setBatatasPedido] = useState([])
+
+    const [calzoneVazio, setCalzoneVazio] = useState(false)
+    const [formaEntregaVazia, setFormaEntregaVazia] = useState(false)
+
+    const resetEstados = () => {
+        setCalzonesPedido([])
+        setBatatasPedido([])
+        setBebidasPedido([])
+        setCalzoneAtual('')
+        setBatataAtual('')
+        setBebidaAtual('')
     }
 
-    const [calzone, setCalzone] = useState(1)
-    const [quantidadeCalzone, setQuantidadeCalzone] = useState(1)
-    const [calzones, setCalzones] = useState([])
+    const handleSubmit = async (e) => {
 
-    const [batata, setBatata] = useState(0)
-    const [quantidadeBatata, setQuantidadeBatata] = useState(1)
-    const [batatas, setBatatas] = useState([])
+        setCalzoneVazio(false)
+        setFormaEntregaVazia(false)
+        e.preventDefault()
 
-    const [bebida, setBebida] = useState(0)
-    const [quantidadeBebida, setQuantidadeBebida] = useState(1)
-    const [bebidas, setBebidas] = useState([])
+        if(calzonesPedido.length === 0)
+            setCalzoneVazio(true)
 
-    const [entrega, setEntrega] = useState('')
+        if(!entrega)
+            setFormaEntregaVazia(true)
+
+        if(calzonesPedido.length === 0 || !entrega) {
+            return
+        }
+
+        const data = {
+            "calzones": calzonesPedido,
+            "bebidas": bebidasPedido,
+            "batatas": batatasPedido,
+            "entrega": entrega,
+            "idPessoa": 1
+        }
+
+        try {
+            const response = await fetch('http://localhost:8080/api/pedidos', {
+                method: "POST",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                redirect: "follow",
+                referrerPolicy: "no-referrer",
+                body: JSON.stringify(data),
+            });
+            resetEstados()
+            setSucesso('Pedido Realizado com sucesso!')
+            return response.json()
+
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
 
     const handleCalzones = (e) => {
         e.preventDefault()
 
-        let calzoneBanco = {
-            id: 1,
-            tipo: 'C',
-            descricao: 'calabresa',
+        let calzone = {
+            "key": cont.toString(),
+            "idProduto": idCalzoneAtual.toString(),
+            "descricao": calzoneAtual,
+            "quantidade": quantidadeCalzone.toString()
         }
 
-        calzoneBanco.quantidade = quantidadeCalzone
+        setCalzonesPedido([...calzonesPedido, calzone])
 
-        setCalzones([...calzones, calzoneBanco])
+        setCont(cont + 1)
         setQuantidadeCalzone(1)
+        setCalzoneAtual('')
+        setIdCalzoneAtual(0)
     }
 
     const handleBatatas = (e) => {
         e.preventDefault()
 
-        let batataBanco = {
-            id: 1,
-            tipo: 'B',
-            descricao: 'Pequena',
+        let batata = {
+            "key": cont.toString(),
+            "idProduto": idBatataAtual.toString(),
+            "descricao": batataAtual,
+            "quantidade": quantidadeBatata.toString()
         }
 
-        batataBanco.quantidade = quantidadeBatata
+        setBatatasPedido([...batatasPedido, batata])
 
-        setBatatas([...batatas, batataBanco])
+        setCont(cont + 1)
+        setQuantidadeBatata(1)
+        setBatataAtual('')
     }
 
     const handleBebidas = (e) => {
         e.preventDefault()
 
-        let bebidaBanco = {
-            id: 1,
-            tipo: 'B',
-            descricao: 'Refrigerante',
+        let bebida = {
+            "key": cont.toString(),
+            "idProduto": idBebidaAtual.toString(),
+            "descricao": bebidaAtual,
+            "quantidade": quantidadeBebida.toString()
         }
 
-        bebidaBanco.quantidade = quantidadeBebida
+        setBebidasPedido([...bebidasPedido, bebida])
 
-        setBebidas([...bebidas, bebidaBanco])
+        setCont(cont + 1)
+        setQuantidadeBatata(1)
+        setBebidaAtual('')
     }
 
-    const removeCalzone = (calzone) => {
-        console.log(calzone)
-        let newCalzonesArray = calzones.filter(c => c.id !== calzone.id)
-        setCalzones(newCalzonesArray)
+    const removeCalzone = (descricao) => {
+        let newCalzonesArray = calzonesPedido.filter(c => c.descricao !== descricao)
+        setCalzonesPedido(newCalzonesArray)
 
     }
 
-    const removeBatata = (batata) => {
-        let newBatatasArray = batatas.filter(b => b.id !== batata.id)
-        setBatatas(newBatatasArray)
+    const removeBatata = (descricao) => {
+        let newBatatasArray = batatasPedido.filter(b => b.descricao !== descricao)
+        setBatatasPedido(newBatatasArray)
     }
 
-    const removeBebida = (bebida) => {
-        let newBebidasArray = bebidas.filter(b => b.id !== bebida.id)
-        setBebidas(newBebidasArray)
+    const removeBebida = (descricao) => {
+        let newBebidasArray = bebidasPedido.filter(b => b.descricao !== descricao)
+        setBebidasPedido(newBebidasArray)
     }
 
     const recuperarCalzones = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/produtos', {
+            const response = await fetch('http://localhost:8080/api/produtos/calzones', {
                 method: "GET",
                 mode: "cors",
                 cache: "no-cache",
@@ -100,10 +169,11 @@ const FormPedido = () => {
             });
 
             const data = await response.json()
+
             data.sort((a, b) => {
-                if(a.nome > b.nome)
+                if (a.descricao > b.descricao)
                     return 1
-                if(a.nome < b.nome)
+                if (a.descricao < b.descricao)
                     return -1
                 return 0
             })
@@ -115,9 +185,71 @@ const FormPedido = () => {
         }
     }
 
+    const recuperarBebidas = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/api/produtos/bebidas', {
+                method: "GET",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                redirect: "follow",
+                referrerPolicy: "no-referrer",
+            });
+
+            const data = await response.json()
+
+            data.sort((a, b) => {
+                if (a.descricao > b.descricao)
+                    return 1
+                if (a.descricao < b.descricao)
+                    return -1
+                return 0
+            })
+            setBebidas(data)
+            return data
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const recuperarBatatas = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/api/produtos/batatas', {
+                method: "GET",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                redirect: "follow",
+                referrerPolicy: "no-referrer",
+            });
+
+            const data = await response.json()
+
+            data.sort((a, b) => {
+                if (a.descricao > b.descricao)
+                    return 1
+                if (a.descricao < b.descricao)
+                    return -1
+                return 0
+            })
+            setBatatas(data)
+            return data
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     useEffect(() => {
         recuperarCalzones()
-    })
+        recuperarBebidas()
+        recuperarBatatas()
+    }, [])
 
     return (
         <div className='mb-5'>
@@ -127,19 +259,30 @@ const FormPedido = () => {
                         <div className="cabeca-card mt-5 display-5">Faça seu pedido!</div>
 
                         <div className="card-body">
-                            <form method="POST" action="" onSubmit={handleSubmit}>
+                            <form  onSubmit={handleSubmit}>
                                 <div className="row mb-1 d-block">
                                     <label htmlFor="calzone"
                                         className="lb-login col-md-4 col-form-label">Escolha uma opção de calzone:</label>
                                     <div className="col-md-10 d-block m-auto">
-                                        <select className="form-select" name="calzone" id="calzone" onChange={e => setCalzone(e.target.value)}>
-                                           
+                                        <select className="form-select" name="calzone" id="calzone" onChange={e => {
+                                            let split = e.target.value.split(",")
+                                            setIdCalzoneAtual(split[0])
+                                            setCalzoneAtual(split[1])
+                                        }}>
+                                            <option value="none">Selecione uma opção</option>
+                                            {
+                                                calzones.map(cal => {
+                                                    return <option key={cal.idProduto} value={cal.idProduto + "," + cal.descricao}>{cal.descricao}</option>
+                                                })
+                                            }
                                         </select>
+
+                                        {calzoneVazio && <div className='mt-2 texto-erro'>Você deve selecionar um calzone</div>}
                                     </div>
                                 </div>
 
                                 {
-                                    calzone !== 0 &&
+                                    (calzoneAtual && calzoneAtual !== 'none') &&
 
                                     <div>
                                         <label htmlFor="quantidade"
@@ -159,17 +302,23 @@ const FormPedido = () => {
                                     <label htmlFor="batata"
                                         className="lb-login col-md-4 col-form-label">Escolha uma opção de batata:</label>
                                     <div className="col-md-10 d-block m-auto">
-                                        <select className="form-select" name="batata" id="batata" onChange={e => setBatata(e.target.value)}>
-                                            <option value="0">Não quero batata</option>
-                                            <option value="p">Pequena</option>
-                                            <option value="m">Média</option>
-                                            <option value="g">Grande</option>
+                                        <select className="form-select" name="batata" id="batata" onChange={e => {
+                                             let split = e.target.value.split(",")
+                                             setIdBatataAtual(split[0])
+                                             setBatataAtual(split[1])
+                                        }}>
+                                            <option value="none">Não quero batata</option>
+                                            {
+                                                batatas.map(bat => {
+                                                    return <option key={bat.idProduto} value={bat.idProduto + "," + bat.descricao}>{bat.descricao}</option>
+                                                })
+                                            }
                                         </select>
                                     </div>
                                 </div>
 
                                 {
-                                    batata !== 0 &&
+                                    (batataAtual && batataAtual !== 'none') &&
 
                                     <div>
                                         <label htmlFor="quantidade"
@@ -189,17 +338,23 @@ const FormPedido = () => {
                                     <label htmlFor="bebida"
                                         className="lb-login col-md-4 col-form-label">Escolha uma opção de bebida:</label>
                                     <div className="col-md-10 d-block m-auto">
-                                        <select className="form-select" name="bebida" id="bebida" onChange={e => setBebida(e.target.value)}>
-                                            <option value="0">Não quero bebida</option>
-                                            <option value="refri">Refrigerante</option>
-                                            <option value="suco">Suco de laranja</option>
-                                            <option value="agua">Água mineral sem gás</option>
+                                        <select className="form-select" name="bebida" id="bebida" onChange={e =>  {
+                                             let split = e.target.value.split(",")
+                                             setIdBebidaAtual(split[0])
+                                             setBebidaAtual(split[1])
+                                        }}>
+                                            <option value="none">Não quero bebida</option>
+                                            {
+                                                bebidas.map(beb => {
+                                                    return <option key={beb.idProduto} value={beb.idProduto + "," + beb.descricao}>{beb.descricao}</option>
+                                                })
+                                            }
                                         </select>
                                     </div>
                                 </div>
 
                                 {
-                                    bebida !== 0 &&
+                                    (bebidaAtual && bebidaAtual !== 'none') &&
 
                                     <div>
                                         <label htmlFor="quantidade"
@@ -231,8 +386,10 @@ const FormPedido = () => {
                                     </div>
                                 </div>
 
+                                {formaEntregaVazia && <div className='mt-2 texto-erro'>Selecione uma forma de entrega</div>}
+
                                 <div className="row mb-5">
-                                    <button type="submit" className="m-auto w-50 my-4 d-block p-2 botaoEntrar">
+                                    <button type="submit"  className="m-auto w-50 my-4 d-block p-2 botaoEntrar">
                                         Fazer Pedido
                                     </button>
                                 </div>
@@ -255,31 +412,31 @@ const FormPedido = () => {
                             <div className="card mt-5">
                                 <div className="cabeca-card mt-5 display-5">Seu pedido</div>
                                 <div className="card-body">
-                                    {calzones.map(calzone => {
-                                        return <div key={calzone.id} className='mx-3 d-flex w-75 justify-content-between'>
+                                    {calzonesPedido.map(calzone => {
+                                        return <div key={calzone.key} className='mx-3 d-flex w-75 justify-content-between'>
                                             <h6 className='text-start mt-2'>{calzone.descricao} {calzone.quantidade}x</h6>
-                                            
-                                            <button className='border-0 bg-transparent' onClick={e => removeCalzone(calzone)}>
+
+                                            <button className='border-0 bg-transparent' onClick={e => removeCalzone(calzone.descricao)}>
                                                 <img src="/assets/trash.png" width={20} height={20} className='bg-danger' alt="" />
                                             </button>
                                         </div>
                                     })}
 
-                                    {batatas.map(batata => {
-                                        return <div key={batata.id} className='mx-3 d-flex w-75 justify-content-between'>
+                                    {batatasPedido.map(batata => {
+                                        return <div key={batata.key} className='mx-3 d-flex w-75 justify-content-between'>
                                             <h6 className='text-start mt-2'>{batata.descricao} {batata.quantidade}x</h6>
 
-                                            <button className='border-0 bg-transparent' onClick={e => removeBatata(batata)}>
+                                            <button className='border-0 bg-transparent' onClick={e => removeBatata(batata.descricao)}>
                                                 <img src="/assets/trash.png" width={20} height={20} className='bg-danger' alt="" />
                                             </button>
                                         </div>
                                     })}
 
-                                    {bebidas.map(bebida => {
-                                        return <div key={bebida.id} className='mx-3 d-flex  w-75 justify-content-between'>
+                                    {bebidasPedido.map(bebida => {
+                                        return <div key={bebida.key} className='mx-3 d-flex  w-75 justify-content-between'>
                                             <h6 className='text-start mt-2'>{bebida.descricao} {bebida.quantidade}x</h6>
 
-                                            <button className='border-0 bg-transparent' onClick={ e => removeBebida(bebida)}>
+                                            <button className='border-0 bg-transparent' onClick={e => removeBebida(bebida.descricao)}>
                                                 <img src="/assets/trash.png" width={20} height={20} className='bg-danger' alt="" />
                                             </button>
                                         </div>
