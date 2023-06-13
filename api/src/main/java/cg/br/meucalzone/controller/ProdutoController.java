@@ -92,46 +92,19 @@ public class ProdutoController {
 
     @GetMapping("/calzones")
     public ResponseEntity<List<Produto>> recuperarCalzones() {
-        List<Produto> produtos = produtoRepository.findAll();
-
-        List<Produto> result = new ArrayList<>();
-
-        for(Produto p : produtos) {
-            if(p.getTipo().getTipo().equals("cal")) {
-                result.add(p);
-            }
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+        List<Produto> calzones = produtoRepository.findAllCalzones();
+        return ResponseEntity.status(HttpStatus.OK).body(calzones);
     }
 
     @GetMapping("/bebidas")
     public ResponseEntity<List<Produto>> recuperarBebidas() {
-        List<Produto> produtos = produtoRepository.findAll();
-
-        List<Produto> result = new ArrayList<>();
-
-        for(Produto p : produtos) {
-            if(p.getTipo().getTipo().equals("beb")) {
-                result.add(p);
-            }
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+        List<Produto> bebidas = produtoRepository.findAllBebidas();
+        return ResponseEntity.status(HttpStatus.OK).body(bebidas);
     }
 
     @GetMapping("/batatas")
     public ResponseEntity<List<Produto>> recuperarBatatas() {
-        List<Produto> produtos = produtoRepository.findAll();
-
-        List<Produto> result = new ArrayList<>();
-
-        for(Produto p : produtos) {
-            if(p.getTipo().getTipo().equals("bat")) {
-                result.add(p);
-            }
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+        List<Produto> batatas = produtoRepository.findAllBatatas();
+        return ResponseEntity.status(HttpStatus.OK).body(batatas);
     }
 }
