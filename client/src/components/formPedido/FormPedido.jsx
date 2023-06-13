@@ -1,10 +1,12 @@
 import './formPedido.css'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { useAutCtx } from '../../context/AuthContext'
 
-const FormPedido = ({setSucesso}) => {
+const FormPedido = ({ setSucesso }) => {
 
     const [cont, setCont] = useState(0)
+    const { user } = useAutCtx()
+    console.log(user)
 
     const [calzones, setCalzones] = useState([])
     const [bebidas, setBebidas] = useState([])
@@ -13,18 +15,21 @@ const FormPedido = ({setSucesso}) => {
 
     const [idCalzoneAtual, setIdCalzoneAtual] = useState(0)
     const [calzoneAtual, setCalzoneAtual] = useState('')
+    const [qtdCalzoneAtual, setQtdCalzoneAtual] = useState(0)
     const [quantidadeCalzone, setQuantidadeCalzone] = useState(1)
 
     const [calzonesPedido, setCalzonesPedido] = useState([])
 
     const [idBebidaAtual, setIdBebidaAtual] = useState(0)
     const [bebidaAtual, setBebidaAtual] = useState('')
+    const [qtdBebidaAtual, setQtdBebidaAtual] = useState(0)
     const [quantidadeBebida, setQuantidadeBebida] = useState(1)
 
     const [bebidasPedido, setBebidasPedido] = useState([])
 
     const [idBatataAtual, setIdBatataAtual] = useState(0)
     const [batataAtual, setBatataAtual] = useState('')
+    const [qtdBatataAtual, setQtdBatataAtual] = useState(0)
     const [quantidadeBatata, setQuantidadeBatata] = useState(1)
 
     const [batatasPedido, setBatatasPedido] = useState([])
@@ -47,13 +52,13 @@ const FormPedido = ({setSucesso}) => {
         setFormaEntregaVazia(false)
         e.preventDefault()
 
-        if(calzonesPedido.length === 0)
+        if (calzonesPedido.length === 0)
             setCalzoneVazio(true)
 
-        if(!entrega)
+        if (!entrega)
             setFormaEntregaVazia(true)
 
-        if(calzonesPedido.length === 0 || !entrega) {
+        if (calzonesPedido.length === 0 || !entrega) {
             return
         }
 
@@ -62,7 +67,7 @@ const FormPedido = ({setSucesso}) => {
             "bebidas": bebidasPedido,
             "batatas": batatasPedido,
             "entrega": entrega,
-            "idPessoa": 1
+            "idPessoa": user.id
         }
 
         try {
@@ -78,7 +83,7 @@ const FormPedido = ({setSucesso}) => {
                 body: JSON.stringify(data),
             });
             resetEstados()
-            setSucesso('Pedido Realizado com sucesso!')
+            setSucesso('Pedido Realizado com sucesso! Acesse meus pedidos clicando em seu nome no menu superior para visualizá-lo!')
             return response.json()
 
         } catch (err) {
@@ -259,7 +264,7 @@ const FormPedido = ({setSucesso}) => {
                         <div className="cabeca-card mt-5 display-5">Faça seu pedido!</div>
 
                         <div className="card-body">
-                            <form  onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmit}>
                                 <div className="row mb-1 d-block">
                                     <label htmlFor="calzone"
                                         className="lb-login col-md-4 col-form-label">Escolha uma opção de calzone:</label>
@@ -268,11 +273,12 @@ const FormPedido = ({setSucesso}) => {
                                             let split = e.target.value.split(",")
                                             setIdCalzoneAtual(split[0])
                                             setCalzoneAtual(split[1])
+                                            setQtdCalzoneAtual(split[2])
                                         }}>
                                             <option value="none">Selecione uma opção</option>
                                             {
                                                 calzones.map(cal => {
-                                                    return <option key={cal.idProduto} value={cal.idProduto + "," + cal.descricao}>{cal.descricao}</option>
+                                                    return <option key={cal.idProduto} value={cal.idProduto + "," + cal.descricao + "," + cal.qtd}>{cal.descricao}</option>
                                                 })
                                             }
                                         </select>
@@ -288,7 +294,7 @@ const FormPedido = ({setSucesso}) => {
                                         <label htmlFor="quantidade"
                                             className="lb-login col-form-label">Quantidade:</label>
                                         <div className='d-flex justify-content-start align-items-center gap-4'>
-                                            <input type="number" min={1} className="form-control margemEsquerda w-20" id="qtdCreatePedidoCalzone" aria-describedby="qtdCreatePedido" value={quantidadeCalzone} onChange={e => setQuantidadeCalzone(e.target.value)} />
+                                            <input type="number"  onKeyDown={e => e.preventDefault()} min={1} max={qtdCalzoneAtual} className="form-control margemEsquerda w-20" id="qtdCreatePedidoCalzone" aria-describedby="qtdCreatePedido" value={quantidadeCalzone} onChange={e => setQuantidadeCalzone(e.target.value)} />
 
                                             <button className='border-0 bg-transparent' onClick={handleCalzones}>
                                                 <img src="/assets/plus.png" width={25} height={25} className='bg-success' alt="" />
@@ -303,14 +309,15 @@ const FormPedido = ({setSucesso}) => {
                                         className="lb-login col-md-4 col-form-label">Escolha uma opção de batata:</label>
                                     <div className="col-md-10 d-block m-auto">
                                         <select className="form-select" name="batata" id="batata" onChange={e => {
-                                             let split = e.target.value.split(",")
-                                             setIdBatataAtual(split[0])
-                                             setBatataAtual(split[1])
+                                            let split = e.target.value.split(",")
+                                            setIdBatataAtual(split[0])
+                                            setBatataAtual(split[1])
+                                            setQtdBatataAtual(split[2])
                                         }}>
                                             <option value="none">Não quero batata</option>
                                             {
                                                 batatas.map(bat => {
-                                                    return <option key={bat.idProduto} value={bat.idProduto + "," + bat.descricao}>{bat.descricao}</option>
+                                                    return <option key={bat.idProduto} value={bat.idProduto + "," + bat.descricao + "," + bat.qtd}>{bat.descricao}</option>
                                                 })
                                             }
                                         </select>
@@ -324,7 +331,7 @@ const FormPedido = ({setSucesso}) => {
                                         <label htmlFor="quantidade"
                                             className="lb-login col-form-label">Quantidade:</label>
                                         <div className='d-flex justify-content-start align-items-center gap-4'>
-                                            <input type="number" min={1} className="form-control margemEsquerda w-20" id="qtdCreatePedidoBatata" aria-describedby="qtdCreatePedido" value={quantidadeBatata} onChange={e => setQuantidadeBatata(e.target.value)} />
+                                            <input type="number"  onKeyDown={e => e.preventDefault()} min={1} max={qtdBatataAtual} className="form-control margemEsquerda w-20" id="qtdCreatePedidoBatata" aria-describedby="qtdCreatePedido" value={quantidadeBatata} onChange={e => setQuantidadeBatata(e.target.value)} />
 
                                             <button className='border-0 bg-transparent' onClick={handleBatatas}>
                                                 <img src="/assets/plus.png" width={25} height={25} className='bg-success' alt="" />
@@ -338,15 +345,16 @@ const FormPedido = ({setSucesso}) => {
                                     <label htmlFor="bebida"
                                         className="lb-login col-md-4 col-form-label">Escolha uma opção de bebida:</label>
                                     <div className="col-md-10 d-block m-auto">
-                                        <select className="form-select" name="bebida" id="bebida" onChange={e =>  {
-                                             let split = e.target.value.split(",")
-                                             setIdBebidaAtual(split[0])
-                                             setBebidaAtual(split[1])
+                                        <select className="form-select" name="bebida" id="bebida" onChange={e => {
+                                            let split = e.target.value.split(",")
+                                            setIdBebidaAtual(split[0])
+                                            setBebidaAtual(split[1])
+                                            setQtdBebidaAtual(split[2])
                                         }}>
                                             <option value="none">Não quero bebida</option>
                                             {
                                                 bebidas.map(beb => {
-                                                    return <option key={beb.idProduto} value={beb.idProduto + "," + beb.descricao}>{beb.descricao}</option>
+                                                    return <option key={beb.idProduto} value={beb.idProduto + "," + beb.descricao + "," + beb.qtd}>{beb.descricao}</option>
                                                 })
                                             }
                                         </select>
@@ -361,7 +369,7 @@ const FormPedido = ({setSucesso}) => {
                                             className="lb-login col-form-label">Quantidade:</label>
 
                                         <div className='d-flex justify-content-start align-items-center gap-4'>
-                                            <input type="number" min={1} className="form-control margemEsquerda w-20" id="qtdCreatePedidoBebida" aria-describedby="qtdCreatePedido" value={quantidadeBebida} onChange={e => setQuantidadeBebida(e.target.value)} />
+                                            <input type="number" onKeyDown={e => e.preventDefault()} min={1} max={qtdBebidaAtual} className="form-control margemEsquerda w-20" id="qtdCreatePedidoBebida" aria-describedby="qtdCreatePedido" value={quantidadeBebida} onChange={e => setQuantidadeBebida(e.target.value)} />
 
                                             <button className='border-0 bg-transparent' onClick={handleBebidas}>
                                                 <img src="/assets/plus.png" width={25} height={25} className='bg-success' alt="" />
@@ -389,7 +397,7 @@ const FormPedido = ({setSucesso}) => {
                                 {formaEntregaVazia && <div className='mt-2 texto-erro'>Selecione uma forma de entrega</div>}
 
                                 <div className="row mb-5">
-                                    <button type="submit"  className="m-auto w-50 my-4 d-block p-2 botaoEntrar">
+                                    <button type="submit" className="m-auto w-50 my-4 d-block p-2 botaoEntrar">
                                         Fazer Pedido
                                     </button>
                                 </div>
@@ -403,7 +411,7 @@ const FormPedido = ({setSucesso}) => {
                             <div className="card mt-5">
                                 <div className="cabeca-card mt-5 display-5">Seu endereço</div>
                                 <div className="card-body">
-                                    <p className='h5 mt-2 mb-5'>Rua Lorem ipsum dolor sit amet, 1500, Bairro, Cidade</p>
+                                    <p className='h5 mt-2 mb-5'>{user.endereco.rua}, {user.endereco.numero} - {user.endereco.bairro}, {user.endereco.cidade}</p>
                                 </div>
                             </div>
                         </div>

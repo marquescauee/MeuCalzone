@@ -1,8 +1,12 @@
 import React from "react"
 import './header.css'
 import { Link } from "react-router-dom"
+import { useAutCtx } from "../../../context/AuthContext"
 
 const Header = () => {
+
+    const { user } = useAutCtx()
+    const { logout } = useAutCtx()
 
     return (
         <div>
@@ -23,20 +27,23 @@ const Header = () => {
                             <Link className="nav-link text-light" to={"/localizacao"}>Localização</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link text-light bg-warning text-dark noHover" to={"/loginCadastro"}>Login/Cadastro</Link>
+                            {
+                                !user &&
+                                <Link className="nav-link text-light bg-warning text-dark noHover" to={"/loginCadastro"}>Login/Cadastro</Link>
+                            }
 
-                            {/* {
-                                autCtx.user.nome &&
-                                 <div className="dropdown">
-                                    <button className="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Olá, {autCtx.user.nome}!
+                            {
+                                (user && user.nome) &&
+                                <div className="dropdown">
+                                    <button className="btn btn-warning dropdown-toggle botaoLogado" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Olá, {user.nome}!
                                     </button>
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <Link to={"/"} onClick={sair} className="dropdown-item">Sair</Link>
+                                        <Link to={"/meusPedidos"} className="dropdown-item">Meus Pedidos</Link>
+                                        <Link to={"/"} onClick={logout} className="dropdown-item">Sair</Link>
                                     </div>
                                 </div>
-                            } */}
-
+                            }
                         </li>
                     </ul>
                 </nav>

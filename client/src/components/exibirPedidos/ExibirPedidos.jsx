@@ -1,15 +1,17 @@
-import { useEffect } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from 'react';
 import './exibirPedidos.css'
-import { useState } from 'react';
-import './exibirPedidos.css'
+import { useAutCtx } from '../../context/AuthContext';
 
 const ExibirPedidos = () => {
+
+    const { user } = useAutCtx()
 
     const [pedidos, setPedidos] = useState([])
 
     const recuperarPedidosUsuario = async (id) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/pedidos/${id}`, {
+            const response = await fetch(`http://localhost:8080/api/pedidos/${user.id}`, {
                 method: "GET",
                 mode: "cors",
                 cache: "no-cache",
@@ -42,6 +44,7 @@ const ExibirPedidos = () => {
                     cont++
                     array[pos][cont] = data[i][5]
                     cont++
+
                 }
                 else {
                     pos++
@@ -58,6 +61,7 @@ const ExibirPedidos = () => {
             }
 
             setPedidos(array)
+            console.log(array)
 
             return data
 
@@ -89,22 +93,28 @@ const ExibirPedidos = () => {
                             pedidos.map(pedido => {
                                 return <tr key={pedido[0]}>
                                     {
-                                        (pedido[4] && pedido[5] && pedido[7]) &&
+                                        (pedido[4] && pedido[5] && pedido[7] && pedido[9]) &&
                                         <td>
-                                            {pedido[4] + " " + pedido[3] +  "x | " + pedido[5] + " " + pedido[6]+ "x | " + pedido[7] + " " + pedido[8] + "x"}
+                                            {pedido[4] + " " + pedido[3] + "x | " + pedido[5] + " " + pedido[6] + "x | " + pedido[7] + " " + pedido[8] + "x | " + pedido[9] + " " + pedido[10] + "x"}
+                                        </td>
+                                    }
+                                    {
+                                        (pedido[4] && pedido[5] && pedido[7] && !pedido[9]) &&
+                                        <td>
+                                            {pedido[4] + " " + pedido[3] + "x | " + pedido[5] + " " + pedido[6] + "x | " + pedido[7] + " " + pedido[8] + "x"}
                                         </td>
                                     }
                                     {
                                         (pedido[4] && pedido[5] && !pedido[7]) &&
                                         <td>
-                                            {pedido[4] + " " + pedido[3] +  "x | " + pedido[5] + " " + pedido[6] + "x"}
+                                            {pedido[4] + " " + pedido[3] + "x | " + pedido[5] + " " + pedido[6] + "x"}
                                         </td>
                                     }
                                     {
                                         (pedido[4] && !pedido[5] && !pedido[7]) &&
                                         <td>
-                                        {pedido[4] + " " + pedido[3] + "x"}
-                                    </td>
+                                            {pedido[4] + " " + pedido[3] + "x"}
+                                        </td>
                                     }
                                     <td>
                                         {pedido[1]}

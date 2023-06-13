@@ -1,27 +1,30 @@
 import { useState } from 'react'
 import './login.css'
+import { useAutCtx } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+
+    const autCtx = useAutCtx()
+    const navigate = useNavigate()
 
     const [emailLogin, setEmailLogin] = useState('')
     const [senhaLogin, setSenhaLogin] = useState('')
 
     const [credenciaisErradas, setCredenciaisErradas] = useState(false)
 
-    // const handleLogin = async (e) => {
-    //     e.preventDefault()
+    const handleLogin =  async (e) => {
+        e.preventDefault()
 
-    //     let resultLogin = await autCtx.autenticar(emailLogin, senhaLogin)
+        let resultLogin = await autCtx.login(emailLogin, senhaLogin)
 
-    //     console.log(resultLogin)
+        if(resultLogin) {
+            setCredenciaisErradas(true)
+            return
+        }
 
-    //     if(!resultLogin) {
-    //         setCredenciaisErradas(true)
-    //         return
-    //     }
-
-    //     navigate("/home")
-    // }
+        navigate("/pedido")
+    }
 
     return (
         <div className='divLogin d-flex'>
@@ -57,7 +60,7 @@ const Login = () => {
                                 {credenciaisErradas && <div className="mt-2 texto-erro">Login e/ou senha inválidos.</div>}
 
                                 <div className="row mb-5">
-                                    <button type="submit" className="m-auto w-50 my-4 d-block p-2 botaoEntrar">
+                                    <button type="submit" onClick={handleLogin} className="m-auto w-50 my-4 d-block p-2 botaoEntrar">
                                         Entrar
                                     </button>
                                 </div>

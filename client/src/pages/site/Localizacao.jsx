@@ -1,11 +1,23 @@
 import Footer from "../../components/footer/Footer"
-import Header from "../../components/header/headerCliente/Header"
+import HeaderCliente from "../../components/header/headerCliente/Header"
+import HeaderAdmin from "../../components/header/headerAdmin/Header"
 import LocalRestaurante from "../../components/localizacao/LocalRestaurante"
+import { useAutCtx } from "../../context/AuthContext"
 
 const Localizacao = () => {
+    const { tipo } = useAutCtx()
+
     return (
         <>
-            <Header />
+            {
+                tipo === 'a' &&
+                <HeaderAdmin />
+            }
+
+            {
+                (tipo === 'c' || !tipo) &&
+                <HeaderCliente />
+            }
             <LocalRestaurante />
             <Footer />
         </>

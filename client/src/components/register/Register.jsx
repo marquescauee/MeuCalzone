@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import './register.css'
+import { useAutCtx } from '../../context/AuthContext'
 
 const Register = ({setSucesso}) => {
+   
+    const autCtx = useAutCtx()
 
     const [nomeCadastro, setNomeCadastro] = useState('')
     const [emailCadastro, setEmailCadastro] = useState('')
@@ -82,6 +85,7 @@ const Register = ({setSucesso}) => {
             });
             resetEstados()
             setSucesso('Cadastro bem sucedido! Agora é só fazer login!')
+            autCtx.atualizarRegistros()
             return response.json()
 
         } catch (err) {
