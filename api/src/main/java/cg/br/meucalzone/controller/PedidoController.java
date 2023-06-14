@@ -116,6 +116,7 @@ public class PedidoController {
             case "Calabresa":
             case "Carne":
             case "Frango":
+            case "Queijo":
                 return 20;
             case "Batata Pequena":
                 return 5;

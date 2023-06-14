@@ -1,12 +1,25 @@
 import ExibirPedidos from '../../components/exibirPedidos/ExibirPedidos';
 import Footer from '../../components/footer/Footer';
-import Header from '../../components/header/headerCliente/Header';
+import HeaderCliente from '../../components/header/headerCliente/Header';
+import HeaderAdmin from '../../components/header/headerAdmin/Header';
+import { useAutCtx } from '../../context/AuthContext';
 
 
 const MeusPedidos = () => {
+
+    const { tipo } = useAutCtx()
+
     return (
         <>
-            <Header />
+            {
+                tipo === 'a' &&
+                <HeaderAdmin />
+            }
+
+            {
+                (tipo === 'c' || !tipo) &&
+                <HeaderCliente />
+            }
             <ExibirPedidos />
             <Footer />
         </>

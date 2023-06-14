@@ -61,8 +61,6 @@ const ExibirPedidos = () => {
             }
 
             setPedidos(array)
-            console.log(array)
-
             return data
 
         } catch (err) {

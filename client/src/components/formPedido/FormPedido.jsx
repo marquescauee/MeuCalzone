@@ -6,7 +6,6 @@ const FormPedido = ({ setSucesso }) => {
 
     const [cont, setCont] = useState(0)
     const { user } = useAutCtx()
-    console.log(user)
 
     const [calzones, setCalzones] = useState([])
     const [bebidas, setBebidas] = useState([])

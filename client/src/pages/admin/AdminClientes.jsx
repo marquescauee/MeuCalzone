@@ -170,13 +170,27 @@ const AdminClientes = () => {
                                                 </button>
                                             </td>
 
-                                            <td>
-                                                <button type="button" className="link-tabela botaoRemover" onClick={(e) => handleDelete(e, cli.id)}>
-                                                    <div>
-                                                        <h2 className="d-flex justify-content-center botaoRemover">Remover</h2>
-                                                    </div>
-                                                </button>
-                                            </td>
+                                            {
+                                                cli.tipo === 'a' &&
+                                                <td>
+                                                    <button disabled={true} type="button" className="link-tabela botaoRemover" onClick={(e) => handleDelete(e, cli.id)}>
+                                                        <div>
+                                                            <h2 className="d-flex justify-content-center botaoRemover">Remover</h2>
+                                                        </div>
+                                                    </button>
+                                                </td>
+                                            }
+
+                                            {
+                                                cli.tipo === 'c' &&
+                                                <td>
+                                                    <button type="button" className="link-tabela botaoRemover" onClick={(e) => handleDelete(e, cli.id)}>
+                                                        <div>
+                                                            <h2 className="d-flex justify-content-center botaoRemover">Remover</h2>
+                                                        </div>
+                                                    </button>
+                                                </td>
+                                            }
                                         </tr>
                                     })
                                 }
